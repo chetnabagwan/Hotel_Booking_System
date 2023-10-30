@@ -1,0 +1,44 @@
+WELCOME_MESSAGE : '------------Welcome to HOTEL BOOKING SYSTEM--------------'
+
+ROW_NOT_EXISTS_MESSAGE : 'Error!! Row does not exist'
+
+WRONG_INPUT_ENTERED_MESSAGE : 'Wrong input entered!! Please try again'
+
+PRINT_USERNAME : "Enter username : "
+
+PRINT_PASSWORD : 'Enter password : '
+
+ENTER_STRONG_PASSWORD : "Enter strong password : "
+
+ENTER_ROLE : "Enter the role of the user : "
+
+ENTER_GENDER : "Enter gender :  "
+
+ENTER_PHONE_NO : "Enter phone number :  "
+
+ENTER_MAIL : "Enter email id :  "
+
+ENTER_AGE : "Enter age : "
+
+WELCOME_ADMIN_MESSAGE : Welcome as Admin
+
+ENTER_EMP_ID : "Enter the id : "
+
+ENTER_DEFAULT_PASSWORD : 'Enter your default password : '
+
+ENTER_NEW_PASSWORD : 'Enter new password : '
+
+CONFIRM_PASSWORD : 'Enter new password to confirm : '
+
+PRINT_LOGIN : "Login into the system. You have  3 attempts!"
+
+LOGIN_FAILED : Login failed!! Try again. Total attempts left
+
+
+PASSWORD_REQUIREMENTS : | 
+ Conditions for a valid password are :
+
+  -> Should have at least one number.
+  -> Should have at least one uppercase and one lowercase character.
+  -> Should have at least one special symbol.
+  -> Should be between 6 to 20 characters long.

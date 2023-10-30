@@ -1,0 +1,34 @@
+ADMIN_PROMPT : |
+  Enter:
+  1. Add rooms
+  2. Remove rooms
+  3. Add new Receptionist
+  4. Delete Receptionist
+  5. Update the details of the rooms
+  6. View all Receptionists
+  7. View status of the hotel
+  8. Exit
+  
+  Your choice:-
+
+RECEPTIONIST_PROMPT : |
+  Enter:
+  1. Check-in
+  2. Check-out
+  3. Billing
+  4. View my details
+  5. Update my details 
+  6. Exit
+  
+  Your choice:-
+
+UPDATE_ROOMS_DETAILS_PROMPT : |
+  Enter:
+  - '1' to update room type
+  - '2' to update room_price 
+
+  Your choice:-
+
+ATTEMPTS : 3
+
+DATABASE NAME : 'hotel.db'

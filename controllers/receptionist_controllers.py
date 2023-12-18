@@ -1,6 +1,5 @@
 import logging
 from utils.config_class import Config
-from db.queries.queries_config import Config
 from db import database_operations 
 import datetime
 

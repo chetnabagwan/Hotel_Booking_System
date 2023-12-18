@@ -3,7 +3,6 @@ import logging
 from pwinput import pwinput
 from db import database_operations
 from utils.config_class import Config
-from db.queries.queries_config import Config
 from utils.input_validation import password_validation
 
 logger = logging.getLogger('admin')

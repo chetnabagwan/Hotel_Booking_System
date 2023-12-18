@@ -5,7 +5,7 @@ from prettytable import PrettyTable
 from utils.exceptions import RowDoesNotExistException
 from utils.config_class import Config
 from db.queries.queries_config import QueriesConfig
-from .db_context_manager import DatabaseContextManager
+from .database_context_manager import DatabaseContextManager
 
 logger = logging.getLogger('database')
 

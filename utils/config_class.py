@@ -1,7 +1,10 @@
 import yaml
-FPATH = 'prompts.yml'
-FPATH_PRINT_STATEMENTS = 'print_statements.yml'
-FPATH_LOGGING_STATEMENTS = 'logging_statements.yml'
+FPATH = 'yml_files\\prompts.yml'
+FPATH_PRINT_STATEMENTS = 'yml_files\\print_statements.yml'
+FPATH_LOGGING_STATEMENTS = 'yml_files\\logging_statements.yml'
+
+F_PATH_ADMIN_QUERIES = 'yml_files\\admin_queries.yml'
+F_PATH_EMP_QUERIES = 'yml_files\\receptionist_queries.yml'
 
 class Config:
     """
@@ -53,3 +56,49 @@ class Config:
             cls.ERROR_MESSAGE = data['ERROR_MESSAGE']
             cls.ROOM_ADDED = data['ROOM_ADDED']
             cls.ROOM_DELETED = data['ROOM_DELETED']
+
+    @classmethod
+    def loadAdminQueries(cls):
+        with open(F_PATH_ADMIN_QUERIES, 'r') as f:
+            data = yaml.safe_load(f)
+            cls.QUERY_FOR_CREATE_AUTH_TABLE = data['QUERY_FOR_CREATE_AUTH_TABLE']
+            cls.QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE= data['QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE']
+            cls.QUERY_TO_ADD_IN_AUTH_TABLE = data['QUERY_TO_ADD_IN_AUTH_TABLE']
+            cls.QUERY_TO_ADD_IN_HELPDESK_DETAILS_TABLE = data['QUERY_TO_ADD_IN_HELPDESK_DETAILS_TABLE']
+            cls.QUERY_TO_VERIFY_LOGIN = data['QUERY_TO_VERIFY_LOGIN']
+            cls.QUERY_TO_DELETE_FROM_AUTH_TABLE = data['QUERY_TO_DELETE_FROM_AUTH_TABLE']
+            cls.QUERY_TO_DEL_RECEPTIONIST = data['QUERY_TO_DEL_RECEPTIONIST']
+            cls.QUERY_TO_ENABLE_FOREIGN_KEY = data['QUERY_TO_ENABLE_FOREIGN_KEY']
+            cls.QUERY_TO_CHECK_IF_DEFAULT_PASWORD = data['QUERY_TO_CHECK_IF_DEFAULT_PASWORD']
+            cls.QUERY_TO_CHANGE_DEFAULT_PASWORD = data['QUERY_TO_CHANGE_DEFAULT_PASWORD']
+            cls.QUERY_TO_UPDATE_ROOM_TYPE = data['QUERY_TO_UPDATE_ROOM_TYPE']
+            cls.QUERY_TO_UPDATE_ROOM_PRICE = data['QUERY_TO_UPDATE_ROOM_PRICE']
+            cls.QUERY_TO_DISPLAY_HOTEL_STATUS= data['QUERY_TO_DISPLAY_HOTEL_STATUS']
+            cls.LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS = data['LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS']
+            cls.LIST_TO_DISPLAY_HOTEL_STATUS = data['LIST_TO_DISPLAY_HOTEL_STATUS']
+            cls.QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE = data['QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE']
+            cls.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE = data['QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE']
+
+
+    @classmethod
+    def loadReceptionistQueries(cls):
+        with open(F_PATH_EMP_QUERIES, 'r') as f:
+            data = yaml.safe_load(f)
+            cls.QUERY_TO_UPDATE_EMP_MAIL = data['QUERY_TO_UPDATE_EMP_MAIL']
+            cls.QUERY_TO_UPDATE_EMP_AGE = data['QUERY_TO_UPDATE_EMP_AGE']
+            cls.QUERY_TO_UPDATE_EMP_PHONE = data['QUERY_TO_UPDATE_EMP_PHONE']
+            cls.QUERY_TO_UPDATE_EMP_GENDER = data['QUERY_TO_UPDATE_EMP_GENDER']
+            cls.LIST_TO_DISPLAY_SELFRECEPTIONIST_DETAILS = data['LIST_TO_DISPLAY_SELFRECEPTIONIST_DETAILS'] 
+            
+    @classmethod
+    def config_loader(cls,func):
+        def wrapper_func():
+            Config.load()
+            Config.load_print_statements()
+            Config.load_logging_statements()
+            Config.loadAdminQueries()
+            Config.loadReceptionistQueries() 
+            func()      
+        return wrapper_func
+
+   

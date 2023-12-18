@@ -1,7 +1,7 @@
 import hashlib
 import logging
 from pwinput import pwinput
-from db import database
+from db import database_operations
 from utils.config_class import Config
 from db.queries.queries_config import QueriesConfig
 from utils.input_validation import password_validation
@@ -27,9 +27,9 @@ class Admin:
                 case '5':
                     Admin.update_rooms_info()
                 case '6':
-                    database.display_data(QueriesConfig.QUERY_TO_DISPLAY_ALLRECEPTIONIST_DETAILS,QueriesConfig.LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS)
+                    database_operations.display_data(QueriesConfig.QUERY_TO_DISPLAY_ALLRECEPTIONIST_DETAILS,QueriesConfig.LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS)
                 case '7':
-                    database.display_data(QueriesConfig.QUERY_TO_DISPLAY_HOTEL_STATUS,QueriesConfig.LIST_TO_DISPLAY_HOTEL_STATUS)
+                    database_operations.display_data(QueriesConfig.QUERY_TO_DISPLAY_HOTEL_STATUS,QueriesConfig.LIST_TO_DISPLAY_HOTEL_STATUS)
                 case _:
                     print(Config.WRONG_INPUT_ENTERED_MESSAGE)
         user_input = input(Config.ADMIN_PROMPT)
@@ -37,12 +37,12 @@ class Admin:
     def add_rooms() :
         r_type=input("Enter room type: ")
         r_price=input("Enter room price: ")
-        database.execute(QueriesConfig.QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE,(r_type,r_price,))
+        database_operations.execute(QueriesConfig.QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE,(r_type,r_price,))
         print(Config.ROOM_ADDED)
             
     def del_rooms() :     
         r_no=input("Enter room no : ")
-        database.execute(QueriesConfig.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE,(r_no,))
+        database_operations.execute(QueriesConfig.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE,(r_no,))
         print(Config.ROOM_DELETED)
            
     @staticmethod
@@ -60,15 +60,15 @@ class Admin:
         emp_age = int(input(Config.ENTER_AGE))
         emp_phone = int(input(Config.ENTER_PHONE_NO))
         emp_gender = input(Config.ENTER_GENDER)
-        database.add_data(QueriesConfig.QUERY_TO_ADD_IN_AUTH_TABLE,(username,hashed_password,role))
-        database.add_data(QueriesConfig.QUERY_TO_ADD_IN_HELPDESK_DETAILS_TABLE,(emp_mail,emp_age,emp_phone,emp_gender))
+        database_operations.add_data(QueriesConfig.QUERY_TO_ADD_IN_AUTH_TABLE,(username,hashed_password,role))
+        database_operations.add_data(QueriesConfig.QUERY_TO_ADD_IN_HELPDESK_DETAILS_TABLE,(emp_mail,emp_age,emp_phone,emp_gender))
         logging.info(Config.REGISTERED_SUCCESSFULLY)
 
     @staticmethod    
     def del_receptionist():   
         emp_id= input(Config.ENTER_EMP_ID)
-        database.delete_data(QueriesConfig.QUERY_TO_DELETE_FROM_AUTH_TABLE,emp_id)
-        database.delete_data(QueriesConfig.QUERY_TO_DEL_RECEPTIONIST,emp_id)
+        database_operations.delete_data(QueriesConfig.QUERY_TO_DELETE_FROM_AUTH_TABLE,emp_id)
+        database_operations.delete_data(QueriesConfig.QUERY_TO_DEL_RECEPTIONIST,emp_id)
         logging.warning(Config.DELETED_SUCCESSFULLY)
     
 
@@ -78,12 +78,12 @@ class Admin:
         ch=input("Enter your choice: ")
         if ch=='1':
             new_type=input("Enter the new room type")
-            database.update_data(QueriesConfig.QUERY_TO_UPDATE_ROOM_TYPE,room_no)
+            database_operations.update_data(QueriesConfig.QUERY_TO_UPDATE_ROOM_TYPE,room_no)
             print(Config.UPDATED_SUCCESSFULLY)
         
         elif ch=='2':
            price=input("Enter the new price: ")
-           database.update_data(QueriesConfig.QUERY_TO_UPDATE_ROOM_TYPE,room_no)
+           database_operations.update_data(QueriesConfig.QUERY_TO_UPDATE_ROOM_TYPE,room_no)
            print(Config.UPDATED_SUCCESSFULLY)
         else:
             pass

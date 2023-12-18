@@ -1,4 +1,4 @@
-WELCOME_MESSAGE : '------------Welcome to HOTEL BOOKING SYSTEM--------------'
+WELCOME_MESSAGE : "\n ------------Welcome to HOTEL BOOKING SYSTEM--------------\n"
 
 ROW_NOT_EXISTS_MESSAGE : 'Error!! Row does not exist'
 

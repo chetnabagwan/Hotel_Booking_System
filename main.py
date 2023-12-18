@@ -10,9 +10,7 @@ logger = logging.getLogger('main')
 @Config.config_loader
 def start():
     logger.info(Config.WELCOME_LOGGING_INFO)
-    print("\n")
     print(Config.WELCOME_MESSAGE)   
-    print("\n")
     Authentication()  
 
 if __name__ == '__main__':

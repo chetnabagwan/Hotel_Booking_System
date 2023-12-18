@@ -17,6 +17,10 @@ class Config:
             cls.RECEPTIONIST_PROMPT = data['RECEPTIONIST_PROMPT']
             cls.UPDATE_ROOMS_DETAILS_PROMPT = data['UPDATE_ROOMS_DETAILS_PROMPT']
             cls.ATTEMPTS = data['ATTEMPTS']
+            cls.PWD_REGEX = data['PWD_REGEX']
+            cls.GEN_REGEX = data['GEN_REGEX']
+            cls.PHONE_NUMBER_REGEX = data['PHONE_NUMBER_REGEX']
+
 
     @classmethod
     def load_print_statements(cls):

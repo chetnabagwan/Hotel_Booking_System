@@ -1,6 +1,6 @@
 import logging
 from utils.config_class import Config
-from db.queries.queries_config import QueriesConfig
+from db.queries.queries_config import Config
 from db import database_operations 
 import datetime
 
@@ -23,7 +23,7 @@ class Receptionist:
                 case '3':
                     pass #Billing()
                 case '4':
-                    database_operations.display_data(QueriesConfig.QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS,self.userid,QueriesConfig.QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS)
+                    database_operations.display_data(Config.QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS,self.userid,Config.QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS)
                 case '5':
                     self.update_details()
                 case _:
@@ -44,19 +44,19 @@ class Receptionist:
         match self.update_input:
             case '1':
                 email_to_update = input("Enter the new mail:- ")
-                database_operations.update_data(QueriesConfig.QUERY_TO_UPDATE_EMP_MAIL,(email_to_update,self.userid,))
+                database_operations.update_data(Config.QUERY_TO_UPDATE_EMP_MAIL,(email_to_update,self.userid,))
                 logging.debug(Config.UPDATED_SUCCESSFULLY)
             case '2':
                 age_to_update = input("Enter the new age:- ")
-                database_operations.update_data(QueriesConfig.QUERY_TO_UPDATE_EMP_AGE,(age_to_update,self.userid,))
+                database_operations.update_data(Config.QUERY_TO_UPDATE_EMP_AGE,(age_to_update,self.userid,))
                 logging.debug(Config.UPDATED_SUCCESSFULLY)
             case '3':
                 phone_to_update = input("Enter the new phone number:- ")
-                database_operations.update_data(QueriesConfig.QUERY_TO_UPDATE_EMP_PHONE,(phone_to_update,self.userid,))
+                database_operations.update_data(Config.QUERY_TO_UPDATE_EMP_PHONE,(phone_to_update,self.userid,))
                 logging.debug(Config.UPDATED_SUCCESSFULLY)
             case '4':
                 gender_to_update = input("Enter the new gender:- ")
-                database_operations.update_data(QueriesConfig.QUERY_TO_UPDATE_EMP_GENDER,(gender_to_update,self.userid,))
+                database_operations.update_data(Config.QUERY_TO_UPDATE_EMP_GENDER,(gender_to_update,self.userid,))
                 logging.debug(Config.UPDATED_SUCCESSFULLY)
             case _:
                 print(Config.WRONG_INPUT_ENTERED_MESSAGE)

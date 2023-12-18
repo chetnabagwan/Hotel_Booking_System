@@ -1,8 +1,7 @@
 import yaml
-FPATH = 'yml_files\\prompts.yml'
+FPATH_PROMPTS = 'yml_files\\prompts.yml'
 FPATH_PRINT_STATEMENTS = 'yml_files\\print_statements.yml'
 FPATH_LOGGING_STATEMENTS = 'yml_files\\logging_statements.yml'
-
 F_PATH_ADMIN_QUERIES = 'yml_files\\admin_queries.yml'
 F_PATH_EMP_QUERIES = 'yml_files\\receptionist_queries.yml'
 
@@ -12,7 +11,7 @@ class Config:
     """
     @classmethod
     def load(cls):
-        with open(FPATH, 'r') as f:
+        with open(FPATH_PROMPTS, 'r') as f:
             data = yaml.safe_load(f)
             cls.ADMIN_PROMPT = data['ADMIN_PROMPT']
             cls.RECEPTIONIST_PROMPT = data['RECEPTIONIST_PROMPT']
@@ -78,6 +77,7 @@ class Config:
             cls.LIST_TO_DISPLAY_HOTEL_STATUS = data['LIST_TO_DISPLAY_HOTEL_STATUS']
             cls.QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE = data['QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE']
             cls.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE = data['QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE']
+
 
 
     @classmethod

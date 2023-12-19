@@ -29,7 +29,8 @@ class Receptionist:
                     print(Config.WRONG_INPUT_ENTERED_MESSAGE)
             user_input = input(Config.RECEPTIONIST_PROMPT)
 
-    def checkin():
+    def book_room(self):
+        print("Room types")
         pass
 
     def checkout():

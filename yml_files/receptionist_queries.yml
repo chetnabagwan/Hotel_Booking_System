@@ -29,6 +29,6 @@ QUERY_TO_UPDATE_EMP_GENDER : |
   SET employee_gender = ? 
   WHERE employee_id = ?
 
-QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS : 
+# QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS : 
  
 LIST_TO_DISPLAY_SELFRECEPTIONIST_DETAILS : ['Username','Employee_mail','Employee_age','Employee_phone','Employee_gender']

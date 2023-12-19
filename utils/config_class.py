@@ -1,14 +1,89 @@
 import yaml
-FPATH_PROMPTS = 'yml_files\\prompts.yml'
-FPATH_PRINT_STATEMENTS = 'yml_files\\print_statements.yml'
-FPATH_LOGGING_STATEMENTS = 'yml_files\\logging_statements.yml'
-F_PATH_ADMIN_QUERIES = 'yml_files\\admin_queries.yml'
-F_PATH_EMP_QUERIES = 'yml_files\\receptionist_queries.yml'
+import os
+
+# FPATH_PROMPTS = 'yml_files\\prompts.yml'
+# FPATH_PRINT_STATEMENTS = 'yml_files\\print_statements.yml'
+# FPATH_LOGGING_STATEMENTS = 'yml_files\\logging_statements.yml'
+# F_PATH_ADMIN_QUERIES = 'yml_files\\admin_queries.yml'
+# F_PATH_EMP_QUERIES = 'yml_files\\receptionist_queries.yml'
+
+path_current_directory = os.path.dirname(__file__)
+FPATH_PROMPTS = os.path.join(path_current_directory, '../yml_files/prompts.yml')
+FPATH_PRINT_STATEMENTS = os.path.join(path_current_directory, '../yml_files/print_statements.yml')
+FPATH_LOGGING_STATEMENTS = os.path.join(path_current_directory, '../yml_files/logging_statements.yml')
+F_PATH_ADMIN_QUERIES = os.path.join(path_current_directory, '../yml_files/admin_queries.yml')
+F_PATH_EMP_QUERIES = os.path.join(path_current_directory, '../yml_files/receptionist_queries.yml')
+
 
 class Config:
     """
     Maintains all the config variables
     """
+    ADMIN_PROMPT = None
+    RECEPTIONIST_PROMPT = None
+    UPDATE_ROOMS_DETAILS_PROMPT = None
+    ATTEMPTS = None
+    WD_REGEX = None
+    GEN_REGEX = None
+    PHONE_NUMBER_REGEX = None
+    DATABASE_NAME = None  
+
+    WELCOME_MESSAGE =None 
+    ROW_NOT_EXISTS_MESSAGE = None
+    WRONG_INPUT_ENTERED_MESSAGE = None
+    PRINT_USERNAME = None 
+    PRINT_PASSWORD = None
+    ENTER_STRONG_PASSWORD = None
+    ENTER_GENDER = None   
+    ENTER_PHONE_NO = None
+    ENTER_MAIL = None
+    ENTER_AGE = None
+    ENTER_ROLE =  None
+    WELCOME_ADMIN_MESSAGE =None
+    ENTER_EMP_ID = None
+    ENTER_DEFAULT_PASSWORD = None
+    ENTER_NEW_PASSWORD = None
+    CONFIRM_PASSWORD = None
+    PRINT_LOGIN =   None
+    LOGIN_FAILED = None
+    PASSWORD_REQUIREMENTS = None
+
+    WELCOME_LOGGING_INFO = None
+    WRONG_FILE_RUNNED = None
+    REGISTERED_SUCCESSFULLY = None
+    DELETED_SUCCESSFULLY = None
+    UPDATED_SUCCESSFULLY = None
+    LOGGED_IN = None
+    ERROR_MESSAGE = None
+    ROOM_ADDED = None
+    ROOM_DELETED = None
+
+    QUERY_FOR_CREATE_AUTH_TABLE = None
+    QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE = None
+    QUERY_FOR_CREATE_ROOMS_DETAILS_TABLE = None
+    QUERY_FOR_CREATE_BOOKINGS_TABLE =None
+    QUERY_TO_ADD_IN_AUTH_TABLE = None
+    QUERY_TO_ADD_IN_HELPDESK_DETAILS_TABLE = None
+    QUERY_TO_VERIFY_LOGIN = None
+    QUERY_TO_DELETE_FROM_AUTH_TABLE = None
+    QUERY_TO_DEL_RECEPTIONIST = None
+    QUERY_TO_ENABLE_FOREIGN_KEY = None
+    QUERY_TO_CHECK_IF_DEFAULT_PASWORD = None
+    QUERY_TO_CHANGE_DEFAULT_PASWORD = None
+    QUERY_TO_UPDATE_ROOM_TYPE = None
+    QUERY_TO_UPDATE_ROOM_PRICE = None
+    QUERY_TO_DISPLAY_HOTEL_STATUS = None
+    LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS = None
+    QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE = None
+    QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE = None
+
+    QUERY_TO_UPDATE_EMP_MAIL = None
+    QUERY_TO_UPDATE_EMP_AGE = None
+    QUERY_TO_UPDATE_EMP_PHONE = None
+    QUERY_TO_UPDATE_EMP_GENDER = None
+    LIST_TO_DISPLAY_SELFRECEPTIONIST_DETAILS = None
+
+
     @classmethod
     def load(cls):
         with open(FPATH_PROMPTS, 'r') as f:
@@ -20,7 +95,7 @@ class Config:
             cls.PWD_REGEX = data['PWD_REGEX']
             cls.GEN_REGEX = data['GEN_REGEX']
             cls.PHONE_NUMBER_REGEX = data['PHONE_NUMBER_REGEX']
-
+            cls.DATABASE_NAME = data['DATABASE_NAME']
 
     @classmethod
     def load_print_statements(cls):
@@ -65,7 +140,9 @@ class Config:
         with open(F_PATH_ADMIN_QUERIES, 'r') as f:
             data = yaml.safe_load(f)
             cls.QUERY_FOR_CREATE_AUTH_TABLE = data['QUERY_FOR_CREATE_AUTH_TABLE']
-            cls.QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE= data['QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE']
+            cls.QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE = data['QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE']
+            cls.QUERY_FOR_CREATE_ROOMS_DETAILS_TABLE = data['QUERY_FOR_CREATE_ROOMS_DETAILS_TABLE']
+            cls.QUERY_FOR_CREATE_BOOKINGS_TABLE = data['QUERY_FOR_CREATE_BOOKINGS_TABLE']
             cls.QUERY_TO_ADD_IN_AUTH_TABLE = data['QUERY_TO_ADD_IN_AUTH_TABLE']
             cls.QUERY_TO_ADD_IN_HELPDESK_DETAILS_TABLE = data['QUERY_TO_ADD_IN_HELPDESK_DETAILS_TABLE']
             cls.QUERY_TO_VERIFY_LOGIN = data['QUERY_TO_VERIFY_LOGIN']
@@ -83,7 +160,6 @@ class Config:
             cls.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE = data['QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE']
 
 
-
     @classmethod
     def loadReceptionistQueries(cls):
         with open(F_PATH_EMP_QUERIES, 'r') as f:
@@ -97,12 +173,13 @@ class Config:
     @classmethod
     def config_loader(cls,func):
         def wrapper_func():
-            Config.load()
-            Config.load_print_statements()
-            Config.load_logging_statements()
-            Config.loadAdminQueries()
-            Config.loadReceptionistQueries() 
+            cls.load()
+            cls.load_print_statements()
+            cls.load_logging_statements()
+            cls.loadAdminQueries()
+            cls.loadReceptionistQueries() 
             func()      
         return wrapper_func
+    
 
    

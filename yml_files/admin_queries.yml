@@ -1,6 +1,6 @@
 QUERY_FOR_CREATE_AUTH_TABLE : |
                               CREATE TABLE IF NOT EXISTS authentication
-                                ( emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ( emp_id INTEGER PRIMARY KEY,
                                   username TEXT, 
                                   password TEXT, 
                                   role TEXT,
@@ -17,9 +17,9 @@ QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE : |
                                             emp_gender TEXT,
                                             FOREIGN KEY (emp_id) REFERENCES authentication(emp_id) ON DELETE CASCADE)
                                           
-QUERY_FOR_CREATE_GUESTS_DETAILS : |
-                                    CREATE TABLE IF NOT EXISTS guests_details
-                                    (g_id INTEGER PRIMARY KEY AUTOINCREMENT ,
+QUERY_FOR_CREATE_BOOKINGS_TABLE: |
+                                    CREATE TABLE IF NOT EXISTS bookings
+                                    (g_id INTEGER PRIMARY KEY,
                                     g_name TEXT,
                                     g_email TEXT UNIQUE,
                                     g_phone INTEGER UNIQUE,
@@ -27,10 +27,9 @@ QUERY_FOR_CREATE_GUESTS_DETAILS : |
                                     room_no INTEGER,
                                     check_in_date DATE,
                                     check_out_date DATE,
-                                    food INTEGER,
-                                    laundary INTEGER,
+                                    services TEXT,
                                     FOREIGN KEY (room_no) REFERENCES rooms_details(room_no) ON DELETE CASCADE)
-QUERY_FOR_CREATE_ROOMS_DETAILS : |
+QUERY_FOR_CREATE_ROOMS_DETAILS_TABLE : |
                                     CREATE TABLE IF NOT EXISTS rooms_details
                                     (room_no INTEGER PRIMARY KEY AUTOINCREMENT,
                                      room_type TEXT,
@@ -66,7 +65,7 @@ QUERY_TO_DISPLAY_ALLRECEPTIONIST_DETAILS : |
   INNER JOIN helpdesk_details ON authentication.emp_id = helpdesk_details.emp_id
 
 QUERY_TO_DISPLAY_HOTEL_STATUS : |      
-  SELECT rooms_details.room_no,g_id,g_name,g_email,g_phone,g_adrs,check_in_date,check_out_date,food,laundary
+  SELECT rooms_details.room_no,g_id,g_name,g_email,g_phone,g_adrs,check_in_date,check_out_date,services
   FROM rooms_details
   INNER JOIN guests_details ON rooms_details.room_no = guests_details.room_no
 

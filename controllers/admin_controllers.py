@@ -3,7 +3,7 @@ import logging
 from pwinput import pwinput
 from db import database_operations
 from utils.config_class import Config
-from utils.input_validation import password_validator,gen_validator
+from utils.input_validation import InputValidations
 
 logger = logging.getLogger('admin')
 
@@ -49,7 +49,7 @@ class Admin:
         username = input(Config.PRINT_USERNAME)
         while True:
             password = pwinput(prompt=Config.PRINT_PASSWORD)
-            if not password_validator(password):
+            if not InputValidations.password_validator(password):
                 print(Config.ENTER_STRONG_PASSWORD)
             else:
                 break

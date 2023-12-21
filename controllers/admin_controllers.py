@@ -72,6 +72,7 @@ class Admin:
     
 
     def update_rooms_info() :
+        """This function updated room information"""
         room_no=input("Enter room no to update details : ")
         print(Config.UPDATE_ROOMS_DETAILS_PROMPT)
         ch=input("Enter your choice: ")

@@ -12,7 +12,7 @@ Functionalities of Admin:
 5.	Admin can view the rooms details in the hotel (total rooms, status of the rooms.
    
 Functionalities of Receptionist:
-1.Login into the system
+1.Login into the system and change their default password
 2.Check-in and Check out
 3.Billing
-4.Avail the room services(like meals, laundry etc.)
+

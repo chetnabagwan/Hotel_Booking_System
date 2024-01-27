@@ -1,5 +1,5 @@
 import logging
-from controllers.auth_controller import Authentication
+from src.controllers.auth_controller import Authentication
 from utils.config_class import Config
 from db.database_operations import create_table
 

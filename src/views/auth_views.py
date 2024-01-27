@@ -1,31 +1,26 @@
-from flask import request
+# from flask import request
 from controllers.auth_controller import Authentication
-from flask.views import MethodView
-from flask_jwt_extended import create_access_token,create_refresh_token,jwt_required,get_jwt,get_jti
-from flask_smorest import Blueprint,abort
-from src.blocklist import BLOCKLIST
-from models.schemas import AuthSchema
+# from flask.views import MethodView
+# from flask_jwt_extended import create_access_token,create_refresh_token,jwt_required,get_jwt,get_jti
+# from flask_smorest import Blueprint,abort
+# from src.blocklist import BLOCKLIST
+# from models.schemas import AuthSchema
+from fastapi import FastAPI,Path,Query,HTTPException
+from pydantic import BaseModel,Field
+from typing import Optional
+from starlette import status
+from fastapi import FastAPI,Body
 
-blp = Blueprint('authentication',__name__)
+app =FastAPI()
+class AuthRequest(BaseModel):
+    username:str = Field(min_length=1)
+    password:str = Field(min_length=1)
+   
+@app.post("/login",status_code=status.HTTP_200_OK)
+def post(user_data:AuthRequest):
+    data = Authentication.login(user_data['username'],password=['password']) 
+    if data:
+        return 'Successful login'
+    else:
+        return "Invalid credentials"
 
-@blp.post("/login")
-class Auth(MethodView):
-    @blp.arguments(AuthSchema)
-    def post(username,password):
-        user_data = request.get_json()
-        username = user_data['username']
-        password = user_data['password']
-        data = Authentication.login(username,password) 
-        if data:
-            access_token = create_access_token(identity=data[0],additional_claims={"role": data[1]}, fresh=True)
-            return {"access_token" : access_token}
-        
-        abort(401, message="Invalid credentials.")
-
-
-@blp.post('/logout')
-@jwt_required()
-def logout_user():
-    jti = get_jwt().get('jti')
-    BLOCKLIST.add(jti)
-    return {'message': 'Successfully logged out'}

@@ -10,6 +10,8 @@ flask-jwt-extended = "*"
 pwinput = "*"
 pyyaml = "*"
 prettytable = "*"
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
 
 [dev-packages]
 

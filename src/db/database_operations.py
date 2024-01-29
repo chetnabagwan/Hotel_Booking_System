@@ -1,7 +1,4 @@
-import hashlib
 import logging
-import sys
-from prettytable import PrettyTable
 from utils.config_class import Config
 from .database_context_manager import DatabaseContextManager
 
@@ -40,7 +37,7 @@ def delete_data(query,num :int) -> None:
 def display_data(query) -> None:
      with DatabaseContextManager(Config.DATABASE_NAME) as connection:
         cursor = connection.cursor()
-        data = cursor.execute(query)
+        data = cursor.execute(query).fetchall()
         return data
         # table = PrettyTable(table_schema)
         # for row in cursor.fetchall():

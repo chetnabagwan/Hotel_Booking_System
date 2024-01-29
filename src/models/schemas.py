@@ -1,35 +1,37 @@
-from marshmallow import Schema,fields
+from pydantic import BaseModel,Field
 
-class AuthSchema(Schema):
-    username = fields.Str(required=True)
-    password = fields.Str(required=True,load_only=True)
+class AuthLoginRequest(BaseModel):
+    username:str = Field(min_length=1)
+    password:str = Field(min_length=1)
 
-class AddRoomSchema(Schema):
-    r_type  = fields.Str(required=True)
-    r_price = fields.Int(required=True)
+class AuthLoginResponse(BaseModel):
+    access_token:str
+    token_type:str
+class AddRoomSchema(BaseModel):
+    r_type:str 
+    r_price:int 
 
-class DelRoomSchema(Schema):
-    room_no = fields.Int(required=True)
+class DelRoomSchema(BaseModel):
+    room_no:int
+class RoomUpdateSchema(BaseModel):
+    room_no:int
+    r_type:str
+    r_price:int
 
-class RoomUpdateSchema(Schema):
-    room_no = fields.Int(required = True)
-    r_type  = fields.Str(required=True)
-    r_price = fields.Int(required=True)
+class AddReceptionistSchema(BaseModel):
+    username:str
+    password:str
+    emp_email:str
+    emp_age:int
+    emp_phone:int
+    emp_gender:str
 
-class AddReceptionistSchema(Schema):
-    username = fields.Str(required=True)
-    password = fields.Str(required=True,load_only=True)
-    emp_email = fields.Str(required=True)
-    emp_age = fields.Int(required=True)
-    emp_phone = fields.Int(required=True)
-    emp_gender = fields.Str(required=True)
+class ReceptionistSchema(BaseModel):
+    emp_id:int
 
-class ReceptionistSchema(Schema):
-    emp_id = fields.Int(required=True)
-
-class CheckinSchema(Schema):
+class CheckinSchema(BaseModel):
     pass
 
-class CheckoutSchema(Schema):
+class CheckoutSchema(BaseModel):
     pass
 

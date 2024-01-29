@@ -47,11 +47,12 @@ class Admin:
         user_input = input(Config.ADMIN_PROMPT)
 
     @staticmethod
-    def add_rooms(r_type,r_price) :
-        database_operations.add_data(Config.QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE,(r_type,r_price))
+    def add_rooms(r_type, r_price) :
+        database_operations.add_data(Config.QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE,(r_type, r_price))
 
     @staticmethod        
-    def del_rooms(r_no) :     
+    def del_rooms(r_no:int) :     
+        print(Config.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE)
         database_operations.delete_data(Config.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE,r_no)
            
     @staticmethod
@@ -68,7 +69,7 @@ class Admin:
 
     @staticmethod
     def update_rooms_info(room_no,r_type,r_price) :
-        database_operations.update_data(Config.QUERY_TO_UPDATE_ROOM_DETAILS,room_no,r_type,r_price)
+        database_operations.update_data(Config.QUERY_TO_UPDATE_ROOM_DETAILS,(room_no,r_type,r_price))
         
     @staticmethod 
     def getroom(room_no):

@@ -15,7 +15,7 @@ F_PATH_ADMIN_QUERIES = os.path.join(path_current_directory, '../yml_files/admin_
 F_PATH_EMP_QUERIES = os.path.join(path_current_directory, '../yml_files/receptionist_queries.yml')
 
 
-class Config:
+class Config :
     """
     Maintains all the config variables
     """
@@ -158,7 +158,7 @@ class Config:
             cls.LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS = data['LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS']
             cls.LIST_TO_DISPLAY_HOTEL_STATUS = data['LIST_TO_DISPLAY_HOTEL_STATUS']
             cls.QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE = data['QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE']
-            cls.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE = data['QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE']
+            cls.QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE = data['QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE']
 
 
     @classmethod
@@ -170,17 +170,13 @@ class Config:
             cls.QUERY_TO_UPDATE_EMP_PHONE = data['QUERY_TO_UPDATE_EMP_PHONE']
             cls.QUERY_TO_UPDATE_EMP_GENDER = data['QUERY_TO_UPDATE_EMP_GENDER']
             cls.QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS = data['QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS'] 
-            
-    @classmethod
-    def config_loader(cls,func):
-        def wrapper_func():
-            cls.load()
-            cls.load_print_statements()
-            cls.load_logging_statements()
-            cls.loadAdminQueries()
-            cls.loadReceptionistQueries() 
-            func()      
-        return wrapper_func
+    
+Config.load()
+Config.load_print_statements()
+Config.load_logging_statements()
+Config.loadAdminQueries()
+Config.loadReceptionistQueries() 
+
     
 
    

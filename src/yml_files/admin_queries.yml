@@ -81,8 +81,7 @@ QUERY_TO_ADD_NEW_RECEPTIONIST : INSERT INTO helpdesk_details(emp_name,emp_pass,e
 
 QUERY_TO_UPDATE_ROOM_DETAILS :  |
                               UPDATE rooms_details 
-                              SET room_type = ?, 
-                              SET room_price = ?, 
+                              SET room_type = ?,room_price = ?
                               WHERE room_no = ?
 
 

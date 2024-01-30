@@ -37,24 +37,10 @@ class Authentication:
     #     database_operations.update_data(Config.QUERY_TO_CHANGE_DEFAULT_PASWORD,(self.hashed_password,self.username))
     
     @staticmethod
-    def login(username,password):
-        while Config.ATTEMPTS:
-            # self.username = input(Config.PRINT_USERNAME)
-            # record = database_operations.fetch_data(Config.QUERY_TO_CHECK_IF_DEFAULT_PASWORD,username)
-            # print(Config.QUERY_TO_CHECK_IF_DEFAULT_PASWORD)
-            # print(record)
-            # if record == 0:
-            #     check = self.change_default_password()      
-            #     if check == False:
-            #         Config.ATTEMPTS-=1
-            #         continue
-            # self.password = pwinput(prompt=Config.PRINT_PASSWORD)   
-            hashed_password= hashlib.sha256(password.encode()).hexdigest()     
-            login_success = database_operations.fetch_user(Config.QUERY_TO_VERIFY_LOGIN,username,hashed_password)
-            if login_success == None:
-                Config.ATTEMPTS-=1
-                print(f"{Config.LOGIN_FAILED} {Config.ATTEMPTS}/3")
-                return None
-            else:
-                print("Login successful")
-                return login_success
+    def login(username,password):  
+        hashed_password= hashlib.sha256(password.encode()).hexdigest()     
+        login_success_data = database_operations.fetch_user(Config.QUERY_TO_VERIFY_LOGIN,username,hashed_password)
+        if login_success_data == None:
+            return None
+        else:
+            return login_success_data

@@ -47,7 +47,7 @@ def updateroom(data:RoomUpdateSchema ):
         raise e
 
 
-@admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED)
+@admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED)#doubt
 def addrecep(data:AddReceptionistSchema):
     try:
         username = data.username
@@ -60,10 +60,9 @@ def addrecep(data:AddReceptionistSchema):
         return {'message': 'Receptionist added'}
     except Exception as e:
         raise e
-        # raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
-@admin_router.delete("/delreceptionist") #working
+@admin_router.delete("/delreceptionist") #doubt
 def delrecep(data:ReceptionistSchema):
     try:
         emp_id = data.emp_id

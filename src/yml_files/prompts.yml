@@ -38,3 +38,8 @@ GEN_REGEX : '^([A-Za-z]+\s*[A-Za-z]+)+$'
 
 PHONE_NUMBER_REGEX : r'^\d{10}$'
 
+ADMIN : 'admin'
+
+RECEPTIONIST : 'receptionist'
+
+

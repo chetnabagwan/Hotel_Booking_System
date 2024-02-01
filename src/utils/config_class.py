@@ -21,6 +21,9 @@ class Config :
     """
     ADMIN_PROMPT = None
     RECEPTIONIST_PROMPT = None
+    ADMIN = None
+    RECEPTIONIST = None
+
     UPDATE_ROOMS_DETAILS_PROMPT = None
     ATTEMPTS = None
     WD_REGEX = None
@@ -47,6 +50,8 @@ class Config :
     PRINT_LOGIN =   None
     LOGIN_FAILED = None
     PASSWORD_REQUIREMENTS = None
+    UNAUTHORIZED_USER = None
+    NO_DATA_FOUND = None
 
     WELCOME_LOGGING_INFO = None
     WRONG_FILE_RUNNED = None
@@ -57,6 +62,9 @@ class Config :
     ERROR_MESSAGE = None
     ROOM_ADDED = None
     ROOM_DELETED = None
+    INVALID_CREDENTIALS = None
+    UNAUTHENTICATED_USER = None
+    USER_ALREADY_EXIST = None
 
     QUERY_FOR_CREATE_AUTH_TABLE = None
     QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE = None
@@ -69,7 +77,7 @@ class Config :
     QUERY_TO_DEL_RECEPTIONIST = None
     QUERY_TO_ENABLE_FOREIGN_KEY = None
     QUERY_TO_CHECK_IF_DEFAULT_PASWORD = None
-    QUERY_TO_CHANGE_DEFAULT_PASWORD = None
+    QUERY_TO_CHANGE_DEFAULT_PASSWORD = None
     QUERY_TO_UPDATE_ROOM_DETAILS = None
     QUERY_TO_DISPLAY_HOTEL_STATUS = None
     LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS = None
@@ -80,6 +88,7 @@ class Config :
     QUERY_TO_UPDATE_EMP_AGE = None
     QUERY_TO_UPDATE_EMP_PHONE = None
     QUERY_TO_UPDATE_EMP_GENDER = None
+    QUERY_TO_FETCH_PASSWORD_FROM_AUTH = None
     LIST_TO_DISPLAY_SELFRECEPTIONIST_DETAILS = None
 
 
@@ -88,6 +97,8 @@ class Config :
         with open(FPATH_PROMPTS, 'r') as f:
             data = yaml.safe_load(f)
             cls.ADMIN_PROMPT = data['ADMIN_PROMPT']
+            cls.ADMIN = data['ADMIN']
+            cls.RECEPTIONIST=  data['RECEPTIONIST']
             cls.RECEPTIONIST_PROMPT = data['RECEPTIONIST_PROMPT']
             cls.UPDATE_ROOMS_DETAILS_PROMPT = data['UPDATE_ROOMS_DETAILS_PROMPT']
             cls.ATTEMPTS = data['ATTEMPTS']
@@ -119,7 +130,11 @@ class Config :
             cls.PRINT_LOGIN = data['PRINT_LOGIN']
             cls.LOGIN_FAILED = data['LOGIN_FAILED']
             cls.PASSWORD_REQUIREMENTS = data['PASSWORD_REQUIREMENTS']
-            
+            cls.UNAUTHORIZED_USER = data['UNAUTHORIZED_USER']
+            cls.NO_DATA_FOUND = data['NO_DATA_FOUND']
+            cls.UNAUTHENTICATED_USER = data['UNAUTHENTICATED_USER']
+            cls.INVALID_CREDENTIALS = data['INVALID_CREDENTIALS']
+            cls.USER_ALREADY_EXIST = data['USER_ALREADY_EXIST']
     @classmethod
     def load_logging_statements(cls):
         with open(FPATH_LOGGING_STATEMENTS,'r') as f:
@@ -150,7 +165,6 @@ class Config :
             cls.QUERY_TO_DEL_RECEPTIONIST = data['QUERY_TO_DEL_RECEPTIONIST']
             cls.QUERY_TO_ENABLE_FOREIGN_KEY = data['QUERY_TO_ENABLE_FOREIGN_KEY']
             cls.QUERY_TO_CHECK_IF_DEFAULT_PASWORD = data['QUERY_TO_CHECK_IF_DEFAULT_PASWORD']
-            cls.QUERY_TO_CHANGE_DEFAULT_PASWORD = data['QUERY_TO_CHANGE_DEFAULT_PASWORD']
             cls.QUERY_TO_UPDATE_ROOM_DETAILS = data['QUERY_TO_UPDATE_ROOM_DETAILS']
             cls.QUERY_TO_FETCH_ROOM = data['QUERY_TO_FETCH_ROOM']
             cls.QUERY_TO_DISPLAY_HOTEL_STATUS= data['QUERY_TO_DISPLAY_HOTEL_STATUS']
@@ -170,6 +184,8 @@ class Config :
             cls.QUERY_TO_UPDATE_EMP_PHONE = data['QUERY_TO_UPDATE_EMP_PHONE']
             cls.QUERY_TO_UPDATE_EMP_GENDER = data['QUERY_TO_UPDATE_EMP_GENDER']
             cls.QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS = data['QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS'] 
+            cls.QUERY_TO_FETCH_PASSWORD_FROM_AUTH = data['QUERY_TO_FETCH_PASSWORD_FROM_AUTH']
+            cls.QUERY_TO_CHANGE_DEFAULT_PASSWORD = data['QUERY_TO_CHANGE_DEFAULT_PASSWORD']
     
 Config.load()
 Config.load_print_statements()

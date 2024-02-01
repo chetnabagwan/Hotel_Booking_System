@@ -1,4 +1,5 @@
 from pydantic import BaseModel,Field
+from fastapi import Path,Query
 
 class AuthLoginRequest(BaseModel):
     username:str = Field(min_length=1)
@@ -27,7 +28,7 @@ class AddReceptionistSchema(BaseModel):
     emp_gender:str
 
 class ReceptionistSchema(BaseModel):
-    emp_id:int
+    emp_id:int = Query
 
 class CheckinSchema(BaseModel):
     pass
@@ -35,3 +36,6 @@ class CheckinSchema(BaseModel):
 class CheckoutSchema(BaseModel):
     pass
 
+class ChangeDefaultPasswordSchema(BaseModel):
+    old_pswd:str
+    new_pswd:str

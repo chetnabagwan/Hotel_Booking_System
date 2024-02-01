@@ -34,6 +34,15 @@ PRINT_LOGIN : "Login into the system. You have  3 attempts!"
 
 LOGIN_FAILED : Login failed!! Try again. Total attempts left
 
+UNAUTHORIZED_USER : "Unauthorized user"
+
+NO_DATA_FOUND : "No such data found"
+
+INVALID_CREDENTIALS : 'Invalid credentials'
+
+UNAUTHENTICATED_USER  : 'Authentication failed/Token not found/Invalid user'
+
+USER_ALREADY_EXIST : 'User already exists'
 
 PASSWORD_REQUIREMENTS : | 
  Conditions for a valid password are :
@@ -42,3 +51,5 @@ PASSWORD_REQUIREMENTS : |
   -> Should have at least one uppercase and one lowercase character.
   -> Should have at least one special symbol.
   -> Should be between 6 to 20 characters long.
+
+

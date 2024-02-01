@@ -1,15 +1,71 @@
-from fastapi import APIRouter,HTTPException,Body
+from fastapi import APIRouter,HTTPException
 from models.schemas import AddRoomSchema,DelRoomSchema
 from starlette import status
 from models.schemas import AddRoomSchema,RoomUpdateSchema,DelRoomSchema,AddReceptionistSchema,ReceptionistSchema
 from controllers.admin_controllers import Admin
+from starlette import status
+from typing import Annotated
+from fastapi import APIRouter, Depends,HTTPException
+from views.auth_views import get_current_user
+from utils.config_class import Config
+from sqlite3 import Error
 
 admin_router =APIRouter(prefix='/admin',
                        tags=['admin'])
 
+user_dependency = Annotated[dict,Depends(get_current_user)]
+
+@admin_router.get('/receptionists') #working
+def getallreceps(user:user_dependency):
+    try:
+        if user[0]!= Config.ADMIN:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
+        data = Admin.receptionist_info()
+        if not data :
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)
+        return data
+    except Exception as e:
+        raise e
+
+
+@admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED) #doubt foreign key constraint failed
+def addrecep(data:AddReceptionistSchema,user:user_dependency):
+    try:
+        if user[0]!= Config.ADMIN:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
+        username = data.username
+        password = data.password
+        emp_email = data.emp_email
+        emp_age = data.emp_age
+        emp_gender = data.emp_gender
+        emp_phone = data.emp_phone
+        Admin.add_receptionists(username,password,emp_email,emp_age,emp_gender,emp_phone)
+        return {'message': 'Receptionist added'}
+    except Error as e:
+        raise e
+        # raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=Config.USER_ALREADY_EXIST)
+    
+    
+@admin_router.delete("/delreceptionist") #working
+def delrecep(data:ReceptionistSchema,user:user_dependency):
+    try:
+        if user[0] != Config.ADMIN:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
+        emp_id = data.emp_id
+        emp =  Admin.getrecep(emp_id)
+        if not emp:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)      
+        Admin.del_receptionist(emp_id)
+        return {'message': 'Receptionist deleted'}
+    except Exception as e:
+        raise e      
+
+
 @admin_router.post("/addroom",status_code=status.HTTP_201_CREATED) #working
-def addroom(data: AddRoomSchema):
-    try:    
+def addroom(data: AddRoomSchema,user:user_dependency):
+    try: 
+        if user[0] != Config.ADMIN:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)   
         Admin.add_rooms(data.r_type,data.r_price)
         return {'message': 'Room added'}
     except:
@@ -17,24 +73,25 @@ def addroom(data: AddRoomSchema):
     
 
 @admin_router.delete("/delroom") #working
-def delroom(data:DelRoomSchema): 
+def delroom(data:DelRoomSchema,user:user_dependency): 
     try:
-        data = dict(data)
-        room_no = data["room_no"]
+        if user[0] != Config.ADMIN:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
+        room_no = data.room_no
         room = Admin.getroom(room_no)
-        
         if room is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Room does not exist")
-            
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)
         Admin.del_rooms(room_no)
         return {'message': 'Room deleted'}
     except Exception as e:
         raise e
 
     
-@admin_router.patch("/updateroom") #working
-def updateroom(data:RoomUpdateSchema ):
+@admin_router.put("/updateroom") #working
+def updateroom(data:RoomUpdateSchema,user:user_dependency):
     try:
+        if user[0] != Config.ADMIN:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         room_no = data.room_no
         r_type = data.r_type
         r_price = data.r_price
@@ -47,41 +104,4 @@ def updateroom(data:RoomUpdateSchema ):
         raise e
 
 
-@admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED)#doubt
-def addrecep(data:AddReceptionistSchema):
-    try:
-        username = data.username
-        password = data.password
-        emp_email = data.emp_email
-        emp_age = data.emp_age
-        emp_gender = data.emp_gender
-        emp_phone = data.emp_phone
-        Admin.add_receptionists(username,password,emp_email,emp_age,emp_gender,emp_phone)
-        return {'message': 'Receptionist added'}
-    except Exception as e:
-        raise e
-    
 
-@admin_router.delete("/delreceptionist") #doubt
-def delrecep(data:ReceptionistSchema):
-    try:
-        emp_id = data.emp_id
-        emp =  Admin.getrecep(emp_id)
-        print(emp)
-        if not emp:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Receptionist does not exist")      
-        Admin.del_receptionist(emp_id)
-        return {'message': 'Receptionist deleted'}
-    except Exception as e:
-        raise e      
-
-
-@admin_router.get('/receptionists') #working
-def getallreceps():
-    try:
-        data = Admin.receptionist_info()
-        if not data :
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="No receptionists found")
-        return data
-    except Exception as e:
-        raise e

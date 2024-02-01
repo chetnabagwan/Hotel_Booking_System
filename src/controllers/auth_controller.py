@@ -11,18 +11,18 @@ logger = logging.getLogger('authentication')
 
 class Authentication:
     
-    def __init__(self):  
+    # def __init__(self):  
         
-        return_value = self.login()
-        if return_value == None:
-            exit()
-        userid, role = return_value
-        if role == 'admin':
-            objAdmin= Admin()
-            objAdmin.menu_admin()
-        else:
-            objRec = Receptionist(userid)
-            objRec.menu_()  
+    #     return_value = self.login()
+    #     if return_value == None:
+    #         exit()
+    #     userid, role = return_value
+    #     if role == 'admin':
+    #         objAdmin= Admin()
+    #         objAdmin.menu_admin()
+    #     else:
+    #         objRec = Receptionist(userid)
+    #         objRec.menu_()  
         
     # def change_default_password(self):
     #     self.default_password = pwinput(prompt=Config.ENTER_DEFAULT_PASSWORD)
@@ -38,9 +38,12 @@ class Authentication:
     
     @staticmethod
     def login(username,password):  
-        hashed_password= hashlib.sha256(password.encode()).hexdigest()     
+        hashed_password= hashlib.sha256(password.encode()).hexdigest()   
         login_success_data = database_operations.fetch_user(Config.QUERY_TO_VERIFY_LOGIN,username,hashed_password)
         if login_success_data == None:
             return None
         else:
             return login_success_data
+        
+    def change_default_password(): 
+        pass

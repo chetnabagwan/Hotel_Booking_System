@@ -1,16 +1,16 @@
 QUERY_FOR_CREATE_AUTH_TABLE : |
                               CREATE TABLE IF NOT EXISTS authentication
                                 ( emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                  username TEXT, 
+                                  username TEXT UNIQUE, 
                                   password TEXT, 
                                   role TEXT,
-                                  is_changed INTEGER DEFAULT 0) 
+                                  pwd_changed INTEGER DEFAULT 0) 
 
 
 
 QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE : |
                                            CREATE TABLE IF NOT EXISTS helpdesk_details
-                                            (emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                            (emp_id INTEGER PRIMARY KEY,
                                             emp_email TEXT UNIQUE,
                                             emp_age INTEGER,
                                             emp_phone INTEGER UNIQUE,
@@ -90,11 +90,7 @@ LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS : ['Employee_id','Username','Employee_ma
 LIST_TO_DISPLAY_HOTEL_STATUS  : ['room_no','room_type','room_status','room_price',guest_id,guest_name_check_in_date]
 
 QUERY_TO_CHECK_IF_DEFAULT_PASWORD : |
-  SELECT is_changed
+  SELECT pwd_changed
   FROM authentication
   WHERE username = ?
 
-QUERY_TO_CHANGE_DEFAULT_PASWORD : |
-  UPDATE authentication
-  SET password = ?,is_changed = 1
-  WHERE username = ?

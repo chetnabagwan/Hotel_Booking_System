@@ -16,6 +16,9 @@ python-multipart = "*"
 python-jose = "*"
 pytest = "*"
 httpx = "*"
+aiofiles = "*"
+jinja2 = "*"
+shortuuid = "*"
 
 [dev-packages]
 

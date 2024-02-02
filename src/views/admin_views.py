@@ -1,4 +1,4 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,HTTPException, Request
 from models.schemas import AddRoomSchema,DelRoomSchema
 from starlette import status
 from models.schemas import AddRoomSchema,RoomUpdateSchema,DelRoomSchema,AddReceptionistSchema,ReceptionistSchema
@@ -9,11 +9,18 @@ from fastapi import APIRouter, Depends,HTTPException
 from views.auth_views import get_current_user
 from utils.config_class import Config
 from sqlite3 import Error
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 
 admin_router =APIRouter(prefix='/admin',
                        tags=['admin'])
 
+templates = Jinja2Templates(directory = "templates")
 user_dependency = Annotated[dict,Depends(get_current_user)]
+
+@admin_router.get("/test")
+def test(request:Request):
+    return templates.TemplateResponse("home.html",{"request": request})
 
 @admin_router.get('/receptionists') #working
 def getallreceps(user:user_dependency):
@@ -29,10 +36,10 @@ def getallreceps(user:user_dependency):
 
 
 @admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED) #doubt foreign key constraint failed
-def addrecep(data:AddReceptionistSchema,user:user_dependency):
+def addrecep(data:AddReceptionistSchema):
     try:
-        if user[0]!= Config.ADMIN:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
+        # if user[0]!= Config.ADMIN:
+        #     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         username = data.username
         password = data.password
         emp_email = data.emp_email

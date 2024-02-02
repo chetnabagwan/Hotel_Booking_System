@@ -1,7 +1,6 @@
 import re
 
 from .config_class import Config
-
 class InputValidations:
 
     @staticmethod

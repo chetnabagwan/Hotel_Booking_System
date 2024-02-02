@@ -1,11 +1,10 @@
 QUERY_FOR_CREATE_AUTH_TABLE : |
                               CREATE TABLE IF NOT EXISTS authentication
-                                ( emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ( user_id INTEGER PRIMARY KEY,
                                   username TEXT UNIQUE, 
                                   password TEXT, 
-                                  role TEXT,
+                                  role TEXT DEFAULT 'receptionist',
                                   pwd_changed INTEGER DEFAULT 0) 
-
 
 
 QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE : |
@@ -15,7 +14,7 @@ QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE : |
                                             emp_age INTEGER,
                                             emp_phone INTEGER UNIQUE,
                                             emp_gender TEXT,
-                                            FOREIGN KEY (emp_id) REFERENCES authentication(emp_id) ON DELETE CASCADE)
+                                            FOREIGN KEY (emp_id) REFERENCES authentication(user_id) ON DELETE CASCADE)
                                           
 QUERY_FOR_CREATE_BOOKINGS_TABLE: |
                                     CREATE TABLE IF NOT EXISTS bookings
@@ -24,31 +23,31 @@ QUERY_FOR_CREATE_BOOKINGS_TABLE: |
                                     g_email TEXT UNIQUE,
                                     g_phone INTEGER UNIQUE,
                                     g_adrs TEXT,
-                                    room_no INTEGER,
+                                    room_id INTEGER,
                                     check_in_date DATE,
                                     check_out_date DATE,
-                                    FOREIGN KEY (room_no) REFERENCES rooms_details(room_no) ON DELETE CASCADE)
+                                    FOREIGN KEY (room_id) REFERENCES rooms_details(room_id) ON DELETE CASCADE)
 
 QUERY_FOR_CREATE_ROOMS_DETAILS_TABLE : |
                                     CREATE TABLE IF NOT EXISTS rooms_details
-                                    (room_no INTEGER PRIMARY AUTOINCREMENT,
-                                     room_type TEXT,
-                                     room_status TEXT DEFAULT 'available',
-                                     room_price INTEGER)
+                                    (room_id INTEGER PRIMARY KEY,
+                                     room_type TEXT, 
+                                     room_price INTEGER,
+                                     room_status TEXT DEFAULT 'available')
 
 QUERY_TO_ADD_IN_AUTH_TABLE : | 
                                INSERT INTO authentication
-                                (username,password) 
-                                VALUES(?,?)
+                                (user_id,username,password) 
+                                VALUES(?,?,?)
 
 QUERY_TO_DELETE_FROM_AUTH_TABLE : |
                               DELETE FROM authentication 
-                              WHERE emp_id = ?
+                              WHERE user_id = ?
 
 QUERY_TO_ADD_IN_HELPDESK_DETAILS_TABLE : | 
                                        INSERT INTO helpdesk_details
-                                       (emp_email,emp_age,emp_phone,emp_gender)
-                                        VALUES(?,?,?,?)
+                                       (emp_id,emp_email,emp_age,emp_phone,emp_gender)
+                                        VALUES(?,?,?,?,?)
 
 QUERY_TO_DEL_RECEPTIONIST : DELETE FROM helpdesk_details WHERE emp_id = ?
 
@@ -60,29 +59,27 @@ QUERY_TO_ENABLE_FOREIGN_KEY : |
                               PRAGMA foreign_keys = 1
                               
 QUERY_TO_DISPLAY_ALLRECEPTIONIST_DETAILS : |
-  SELECT authentication.emp_id, username, emp_email, emp_age, emp_phone, emp_gender
+  SELECT authentication.user_id, username, emp_email, emp_age, emp_phone, emp_gender
   FROM authentication
-  INNER JOIN helpdesk_details ON authentication.emp_id = helpdesk_details.emp_id
+  INNER JOIN helpdesk_details ON authentication.user_id = helpdesk_details.emp_id
 
 QUERY_TO_DISPLAY_HOTEL_STATUS : |      
-  SELECT rooms_details.room_no,g_id,g_name,g_email,g_phone,g_adrs,check_in_date,check_out_date
+  SELECT rooms_details.room_id,g_id,g_name,g_email,g_phone,g_adrs,check_in_date,check_out_date
   FROM rooms_details
-  INNER JOIN guests_details ON rooms_details.room_no = guests_details.room_no
+  INNER JOIN guests_details ON rooms_details.room_id = guests_details.room_id
 
-QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE : INSERT INTO rooms_details (room_type,room_price) VALUES (?,?)
+QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE : INSERT INTO rooms_details (room_id,room_type,room_price) VALUES (?,?,?)
 
-QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE : DELETE FROM rooms_details WHERE room_no = ?
+QUERY_TO_DEL_IN_ROOM_DETAILS_TABLE : DELETE FROM rooms_details WHERE room_id= ?
 
-QUERY_TO_FETCH_ROOM : SELECT * FROM rooms_details WHERE room_no = ?
+QUERY_TO_FETCH_ROOM : SELECT * FROM rooms_details WHERE room_id = ?
 
 QUERY_TO_FETCH_RECEPTIONIST : SELECT * FROM helpdesk_details WHERE emp_id = ?
-
-QUERY_TO_ADD_NEW_RECEPTIONIST : INSERT INTO helpdesk_details(emp_name,emp_pass,emp_email,emp_age,emp_phone,emp_gender) VALUES (?,?,?,?,?,?)
 
 QUERY_TO_UPDATE_ROOM_DETAILS :  |
                               UPDATE rooms_details 
                               SET room_type = ?,room_price = ?
-                              WHERE room_no = ?
+                              WHERE room_id = ?
 
 
 LIST_TO_DISPLAY_ALLRECEPTIONIST_DETAILS : ['Employee_id','Username','Employee_mail','Employee_age','Employee_phone','Employee_gender']
@@ -94,3 +91,7 @@ QUERY_TO_CHECK_IF_DEFAULT_PASWORD : |
   FROM authentication
   WHERE username = ?
 
+QUERY_TO_CHANGE_DEFAULT_PASWORD : |
+  UPDATE authentication
+  SET password = ?,pwd_changed = 1
+  WHERE username = ?

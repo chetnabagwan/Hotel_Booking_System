@@ -1,0 +1,8 @@
+2024-02-02 10:16:19,391 INFO     [main.py:17] Welcome to Employee Management System
+2024-02-02 10:18:14,512 INFO     [main.py:17] Welcome to Employee Management System
+2024-02-02 10:24:57,181 INFO     [main.py:17] Welcome to Employee Management System
+2024-02-02 10:25:37,788 INFO     [main.py:17] Welcome to Employee Management System
+2024-02-02 10:27:57,861 INFO     [main.py:17] Welcome to Employee Management System
+2024-02-02 10:29:55,429 INFO     [main.py:17] Welcome to Employee Management System
+2024-02-02 10:34:19,760 INFO     [main.py:17] Welcome to Employee Management System
+2024-02-02 10:35:32,289 INFO     [main.py:17] Welcome to Employee Management System

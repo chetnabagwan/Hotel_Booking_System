@@ -28,9 +28,9 @@ class Admin:
             raise e
            
     @staticmethod    
-    def del_receptionist(emp_id):   
+    def del_receptionist(user_id):   
        try:
-         add_data(Config.QUERY_TO_DELETE_FROM_AUTH_TABLE,(emp_id,))
+         add_data(Config.QUERY_TO_DELETE_FROM_AUTH_TABLE,(user_id,))
        except sqlite3.Error as e:
            raise e
 

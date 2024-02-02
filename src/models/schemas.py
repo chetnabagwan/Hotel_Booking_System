@@ -39,3 +39,8 @@ class CheckoutSchema(BaseModel):
 class ChangeDefaultPasswordSchema(BaseModel):
     old_pswd:str
     new_pswd:str
+
+class ChangeEmpDetailsSchema(BaseModel):
+    email:str
+    age:int
+    phone:int

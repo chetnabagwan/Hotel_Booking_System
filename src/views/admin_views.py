@@ -25,7 +25,7 @@ def test(request:Request):
 @admin_router.get('/receptionists') #working
 def getallreceps(user:user_dependency):
     try:
-        if user[0]!= Config.ADMIN:
+        if user['role']!= Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         data = Admin.receptionist_info()
         if not data :
@@ -35,11 +35,11 @@ def getallreceps(user:user_dependency):
         raise e
 
 
-@admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED) #doubt foreign key constraint failed
-def addrecep(data:AddReceptionistSchema):
+@admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED) #working
+def addrecep(data:AddReceptionistSchema,user:user_dependency):
     try:
-        # if user[0]!= Config.ADMIN:
-        #     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
+        if user['role']!= Config.ADMIN:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         username = data.username
         password = data.password
         emp_email = data.emp_email
@@ -49,14 +49,13 @@ def addrecep(data:AddReceptionistSchema):
         Admin.add_receptionists(username,password,emp_email,emp_age,emp_gender,emp_phone)
         return {'message': 'Receptionist added'}
     except Error as e:
-        raise e
-        # raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=Config.USER_ALREADY_EXIST)
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=Config.USER_ALREADY_EXIST)
     
     
 @admin_router.delete("/delreceptionist") #working
 def delrecep(data:ReceptionistSchema,user:user_dependency):
     try:
-        if user[0] != Config.ADMIN:
+        if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         emp_id = data.emp_id
         emp =  Admin.getrecep(emp_id)
@@ -71,7 +70,7 @@ def delrecep(data:ReceptionistSchema,user:user_dependency):
 @admin_router.post("/addroom",status_code=status.HTTP_201_CREATED) #working
 def addroom(data: AddRoomSchema,user:user_dependency):
     try: 
-        if user[0] != Config.ADMIN:
+        if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)   
         Admin.add_rooms(data.r_type,data.r_price)
         return {'message': 'Room added'}
@@ -82,7 +81,7 @@ def addroom(data: AddRoomSchema,user:user_dependency):
 @admin_router.delete("/delroom") #working
 def delroom(data:DelRoomSchema,user:user_dependency): 
     try:
-        if user[0] != Config.ADMIN:
+        if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         room_no = data.room_no
         room = Admin.getroom(room_no)
@@ -97,7 +96,7 @@ def delroom(data:DelRoomSchema,user:user_dependency):
 @admin_router.put("/updateroom") #working
 def updateroom(data:RoomUpdateSchema,user:user_dependency):
     try:
-        if user[0] != Config.ADMIN:
+        if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         room_no = data.room_no
         r_type = data.r_type

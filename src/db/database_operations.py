@@ -32,7 +32,6 @@ def fetch_user(query,username: str,password: str) -> str:
         else:
             return (record[0],record[3])        
         
-
 def display_data(query,val) -> None:
      with DatabaseContextManager(Config.DATABASE_NAME) as connection:
         cursor = connection.cursor()
@@ -45,8 +44,8 @@ def update_data(query,*args) -> None:
         cursor.execute(Config.QUERY_TO_ENABLE_FOREIGN_KEY)
         cursor.execute(query,*args)  
 
-def fetch_data(query,str) -> list:
+def fetch_data(query,id:int):
     with DatabaseContextManager(Config.DATABASE_NAME) as connection:
         cursor = connection.cursor()
-        record = cursor.execute(query,(str,)).fetchone()
+        record = cursor.execute(query,(id,)).fetchone()
         return record

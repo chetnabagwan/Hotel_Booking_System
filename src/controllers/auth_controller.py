@@ -1,5 +1,6 @@
 import hashlib
 import logging
+import sqlite3
 from pwinput import pwinput
 from utils.config_class import Config
 from db import database_operations 
@@ -41,9 +42,8 @@ class Authentication:
         hashed_password= hashlib.sha256(password.encode()).hexdigest()   
         login_success_data = database_operations.fetch_user(Config.QUERY_TO_VERIFY_LOGIN,username,hashed_password)
         if login_success_data == None:
-            return None
+            raise sqlite3.Error
         else:
             return login_success_data
         
-    def change_default_password(): 
-        pass
+    

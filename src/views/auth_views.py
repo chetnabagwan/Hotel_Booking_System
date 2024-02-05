@@ -2,6 +2,7 @@ from starlette import status
 from typing import Annotated
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
+import logging
 from fastapi import APIRouter, Depends,HTTPException
 from datetime import datetime,timedelta
 from controllers.auth_controller import Authentication
@@ -15,6 +16,8 @@ ALGORITHM = 'HS256'
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='auth/login')
 
+logger = logging.getLogger('auth')
+
 def create_access_token(user_id:str,role:str,expires_delta:timedelta):
     payload = {'sub':user_id,'role':role}
     expires = datetime.utcnow() + expires_delta
@@ -24,18 +27,21 @@ def create_access_token(user_id:str,role:str,expires_delta:timedelta):
 
 @auth_router.post("/login",status_code=status.HTTP_200_OK) #working
 def login_and_gen_token(user_data: OAuth2PasswordRequestForm=Depends()):
+    logger.info(f'User with username : {user_data.username} tries to login into the application')
+
     try:
         data = Authentication.login(user_data.username,user_data.password) 
        
         if data :
             token = create_access_token(str(data[0]),data[1],timedelta(minutes=15))
             return {'access_token':token,'token_type':'Bearer'}
-    except:
+    except :
+        # raise e
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.INVALID_CREDENTIALS)
 
 
 async def get_current_user(token:Annotated[str,Depends(oauth2_scheme)]):
-    print(token)
+    # print(token)
     try:
         payload = jwt.decode(token,SECRET_KEY,algorithms=[ALGORITHM])
         user_id = payload.get('sub')

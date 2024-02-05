@@ -11,23 +11,30 @@ from utils.config_class import Config
 from sqlite3 import Error
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+import logging
 
 admin_router =APIRouter(prefix='/admin',
                        tags=['admin'])
 
 templates = Jinja2Templates(directory = "templates")
+
 user_dependency = Annotated[dict,Depends(get_current_user)]
+
+logger = logging.getLogger('admin')
 
 @admin_router.get("/test")
 def test(request:Request):
     return templates.TemplateResponse("home.html",{"request": request})
 
-@admin_router.get('/receptionists') #working
-def getallreceps(user:user_dependency):
+@admin_router.get('/receptionists',status_code=status.HTTP_200_OK) #working
+def getallreceps(user : user_dependency):
+    logger.info(f'Admin is viewing all receptionists')
+
     try:
         if user['role']!= Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         data = Admin.receptionist_info()
+        print(data)
         if not data :
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)
         return data
@@ -37,6 +44,8 @@ def getallreceps(user:user_dependency):
 
 @admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED) #working
 def addrecep(data:AddReceptionistSchema,user:user_dependency):
+    logger.info(f'Admin is adding new receptionists')
+
     try:
         if user['role']!= Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
@@ -47,13 +56,15 @@ def addrecep(data:AddReceptionistSchema,user:user_dependency):
         emp_gender = data.emp_gender
         emp_phone = data.emp_phone
         Admin.add_receptionists(username,password,emp_email,emp_age,emp_gender,emp_phone)
-        return {'message': 'Receptionist added'}
-    except Error as e:
+        return {'message': Config.RECEPTIONIST_ADDED}
+    except:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=Config.USER_ALREADY_EXIST)
     
     
 @admin_router.delete("/delreceptionist") #working
 def delrecep(data:ReceptionistSchema,user:user_dependency):
+    logger.info(f'Admin is deleting the receptionist{data.emp_id}')
+
     try:
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
@@ -62,13 +73,15 @@ def delrecep(data:ReceptionistSchema,user:user_dependency):
         if not emp:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)      
         Admin.del_receptionist(emp_id)
-        return {'message': 'Receptionist deleted'}
+        return {'message': Config.RECEPTIONIST_DELETED}
     except Exception as e:
         raise e      
 
 
 @admin_router.post("/addroom",status_code=status.HTTP_201_CREATED) #working
 def addroom(data: AddRoomSchema,user:user_dependency):
+    logger.info(f'Admin is adding new rooms')
+
     try: 
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)   
@@ -80,6 +93,8 @@ def addroom(data: AddRoomSchema,user:user_dependency):
 
 @admin_router.delete("/delroom") #working
 def delroom(data:DelRoomSchema,user:user_dependency): 
+    logger.info(f'Admin is deleting a room')
+
     try:
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
@@ -95,6 +110,8 @@ def delroom(data:DelRoomSchema,user:user_dependency):
     
 @admin_router.put("/updateroom") #working
 def updateroom(data:RoomUpdateSchema,user:user_dependency):
+    logger.info(f'Admin is updating room details of room no : {data.room_no}')
+
     try:
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
@@ -109,5 +126,20 @@ def updateroom(data:RoomUpdateSchema,user:user_dependency):
     except Exception as e:
         raise e
 
+@admin_router.get("/bookings") #working
+def view_all_bookings(user:user_dependency):
+    logger.info(f'Admin is viewing all bookings')
+
+    try:
+        if user['role']!= Config.ADMIN:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
+        data = Admin.view_all_bookings()
+        print(data)
+        if not data :
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)
+        return data
+    except Exception as e:
+        raise e
+    
 
 

@@ -24,3 +24,29 @@ QUERY_TO_UPDATE_EMP_DETAILS: |
 
 QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS : SELECT * FROM helpdesk_Details WHERE emp_id = ?
  
+QUERY_TO_FETCH_ALL_AVAILABLE_ROOMS: SELECT * FROM rooms_details WHERE room_status = "available"
+
+QUERY_FOR_CHECKIN : |
+                    INSERT into bookings(g_id,g_name,g_email,g_phone,g_adrs,room_id,check_in_date,check_out_date)
+                    VALUES(?,?,?,?,?,?,?,?);
+                   
+# QUERY_TO_CHANGE_ROOM_STATUS_CHECKIN : | 
+#                                 UPDATE rooms_details 
+#                                 SET room_status = "unavailable"
+#                                 WHERE room_id = ?
+
+QUERY_FOR_CHECKOUT : |
+                     DELETE FROM bookings 
+                     WHERE g_id = ?
+
+QUERY_TO_GET_ROOMID_FROM_GUESTID : SELECT room_id FROM bookings WHERE g_id = ?
+
+QUERY_TO_CHANGE_ROOM_STATUS : | 
+                              UPDATE rooms_details
+                                SET room_status = 
+                                    CASE 
+                                        WHEN room_status = "available" THEN "unavailable"
+                                        WHEN room_status = "unavailable" THEN "available"
+                                        ELSE room_status
+                                    END
+                                WHERE room_id = ?

@@ -15,7 +15,8 @@ QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE : |
                                             emp_phone INTEGER UNIQUE,
                                             emp_gender TEXT,
                                             FOREIGN KEY (emp_id) REFERENCES authentication(user_id) ON DELETE CASCADE)
-                                          
+
+                 
 QUERY_FOR_CREATE_BOOKINGS_TABLE: |
                                     CREATE TABLE IF NOT EXISTS bookings
                                     (g_id INTEGER PRIMARY KEY,
@@ -26,7 +27,7 @@ QUERY_FOR_CREATE_BOOKINGS_TABLE: |
                                     room_id INTEGER,
                                     check_in_date DATE,
                                     check_out_date DATE,
-                                    FOREIGN KEY (room_id) REFERENCES rooms_details(room_id) ON DELETE CASCADE)
+                                    FOREIGN KEY (room_id) REFERENCES rooms_details(room_id) )
 
 QUERY_FOR_CREATE_ROOMS_DETAILS_TABLE : |
                                     CREATE TABLE IF NOT EXISTS rooms_details
@@ -95,3 +96,5 @@ QUERY_TO_CHANGE_DEFAULT_PASWORD : |
   UPDATE authentication
   SET password = ?,pwd_changed = 1
   WHERE username = ?
+
+QUERY_TO_VIEW_ALL_BOOKINGS : SELECT * FROM bookings

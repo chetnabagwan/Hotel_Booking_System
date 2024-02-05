@@ -1,2 +1,4 @@
 DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
-INFO     httpx:_client.py:1027 HTTP Request: GET http://testserver/healthy "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1027 HTTP Request: GET http://testserver/admin/receptionists "HTTP/1.1 200 OK"
+DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
+INFO     httpx:_client.py:1027 HTTP Request: POST http://testserver/addreceptionist "HTTP/1.1 404 Not Found"

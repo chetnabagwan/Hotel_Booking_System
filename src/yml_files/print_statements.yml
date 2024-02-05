@@ -44,6 +44,16 @@ UNAUTHENTICATED_USER  : 'Authentication failed/Token not found/Invalid user'
 
 USER_ALREADY_EXIST : 'User already exists'
 
+SUCCESSFUL_CHECKIN : "Customer is successfully checked-in"
+
+SUCCESSFUL_CHECKOUT : "Customer is successfully checked-out"
+
+DEFAULT_PASSWORD_CHANGED : "Default password changed"
+
+RECEPTIONIST_DELETED : 'Receptionist deleted'
+
+RECEPTIONIST_ADDED : 'Receptionist added'
+
 PASSWORD_REQUIREMENTS : | 
  Conditions for a valid password are :
 
@@ -51,5 +61,4 @@ PASSWORD_REQUIREMENTS : |
   -> Should have at least one uppercase and one lowercase character.
   -> Should have at least one special symbol.
   -> Should be between 6 to 20 characters long.
-
 

@@ -1,0 +1,116 @@
+05-20-2024 10:20:31 INFO     [app.py:15] Application started
+05-20-2024 10:20:34 INFO     [app.py:15] Application started
+05-20-2024 10:20:39 INFO     [app.py:15] Application started
+05-20-2024 10:20:39 INFO     [app.py:28] Application started
+05-20-2024 10:20:42 INFO     [app.py:15] Application started
+05-20-2024 10:20:42 INFO     [app.py:28] Application ended
+05-20-2024 10:20:46 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-20-2024 10:20:46 DEBUG    [multipart.py:583] Calling on_field_name with data[0:8]
+05-20-2024 10:20:46 DEBUG    [multipart.py:583] Calling on_field_data with data[9:20]
+05-20-2024 10:20:46 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-20-2024 10:20:46 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-20-2024 10:20:46 DEBUG    [multipart.py:583] Calling on_field_name with data[21:29]
+05-20-2024 10:20:46 DEBUG    [multipart.py:583] Calling on_field_data with data[30:34]
+05-20-2024 10:20:46 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-20-2024 10:20:46 DEBUG    [multipart.py:586] Calling on_end with no data
+05-20-2024 10:20:46 INFO     [auth_views.py:30] User tries to login into the application
+05-21-2024 10:21:36 INFO     [app.py:15] Application started
+05-21-2024 10:21:58 INFO     [app.py:15] Application started
+05-22-2024 10:22:00 INFO     [app.py:15] Application started
+05-22-2024 10:22:10 INFO     [app.py:15] Application started
+05-22-2024 10:22:30 INFO     [app.py:15] Application started
+05-22-2024 10:22:35 INFO     [app.py:15] Application started
+05-22-2024 10:22:38 INFO     [app.py:15] Application started
+05-22-2024 10:22:43 INFO     [app.py:15] Application started
+05-22-2024 10:22:46 INFO     [app.py:15] Application started
+05-22-2024 10:22:48 INFO     [app.py:15] Application started
+05-22-2024 10:22:50 INFO     [app.py:15] Application started
+05-22-2024 10:22:52 INFO     [app.py:15] Application started
+05-22-2024 10:22:56 INFO     [app.py:15] Application started
+05-22-2024 10:22:58 INFO     [app.py:15] Application started
+05-23-2024 10:23:02 INFO     [app.py:15] Application started
+05-23-2024 10:23:04 INFO     [app.py:15] Application started
+05-23-2024 10:23:10 INFO     [app.py:15] Application started
+05-23-2024 10:23:17 INFO     [app.py:15] Application started
+05-23-2024 10:23:24 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-23-2024 10:23:24 DEBUG    [multipart.py:583] Calling on_field_name with data[0:8]
+05-23-2024 10:23:24 DEBUG    [multipart.py:583] Calling on_field_data with data[9:19]
+05-23-2024 10:23:24 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-23-2024 10:23:24 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-23-2024 10:23:24 DEBUG    [multipart.py:583] Calling on_field_name with data[20:28]
+05-23-2024 10:23:24 DEBUG    [multipart.py:583] Calling on_field_data with data[29:33]
+05-23-2024 10:23:24 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-23-2024 10:23:24 DEBUG    [multipart.py:586] Calling on_end with no data
+05-23-2024 10:23:24 INFO     [auth_views.py:30] User tries to login into the application
+05-23-2024 10:23:24 INFO     [auth_controller.py:16] Login performed by {username} failed, Invalid credentials
+05-24-2024 10:24:27 INFO     [app.py:15] Application started
+05-24-2024 10:24:31 INFO     [app.py:15] Application started
+05-27-2024 10:27:03 INFO     [app.py:15] Application started
+05-27-2024 10:27:05 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-27-2024 10:27:05 DEBUG    [multipart.py:583] Calling on_field_name with data[0:8]
+05-27-2024 10:27:05 DEBUG    [multipart.py:583] Calling on_field_data with data[9:19]
+05-27-2024 10:27:05 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-27-2024 10:27:05 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-27-2024 10:27:05 DEBUG    [multipart.py:583] Calling on_field_name with data[20:28]
+05-27-2024 10:27:05 DEBUG    [multipart.py:583] Calling on_field_data with data[29:33]
+05-27-2024 10:27:05 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-27-2024 10:27:05 DEBUG    [multipart.py:586] Calling on_end with no data
+05-27-2024 10:27:05 INFO     [auth_views.py:30] User tries to login into the application
+05-27-2024 10:27:05 INFO     [auth_controller.py:16] Login performed by diya failed, Invalid credentials
+05-27-2024 10:27:46 INFO     [app.py:15] Application started
+05-27-2024 10:27:49 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-27-2024 10:27:49 DEBUG    [multipart.py:583] Calling on_field_name with data[0:8]
+05-27-2024 10:27:49 DEBUG    [multipart.py:583] Calling on_field_data with data[9:19]
+05-27-2024 10:27:49 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-27-2024 10:27:49 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-27-2024 10:27:49 DEBUG    [multipart.py:583] Calling on_field_name with data[20:28]
+05-27-2024 10:27:49 DEBUG    [multipart.py:583] Calling on_field_data with data[29:33]
+05-27-2024 10:27:49 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-27-2024 10:27:49 DEBUG    [multipart.py:586] Calling on_end with no data
+05-27-2024 10:27:49 INFO     [auth_views.py:30] User tries to login into the application
+05-27-2024 10:27:49 INFO     [auth_controller.py:16] Login performed with username : diya failed, Invalid credentials
+05-29-2024 10:29:45 INFO     [app.py:15] Application started
+05-30-2024 10:30:00 INFO     [app.py:15] Application started
+05-30-2024 10:30:04 INFO     [app.py:15] Application started
+05-31-2024 10:31:04 INFO     [app.py:15] Application started
+05-31-2024 10:31:10 INFO     [app.py:15] Application started
+05-31-2024 10:31:16 INFO     [app.py:15] Application started
+05-31-2024 10:31:21 INFO     [app.py:15] Application started
+05-31-2024 10:31:23 INFO     [app.py:15] Application started
+05-31-2024 10:31:43 INFO     [app.py:15] Application started
+05-31-2024 10:31:45 INFO     [app.py:15] Application started
+05-31-2024 10:31:47 INFO     [app.py:15] Application started
+05-31-2024 10:31:49 INFO     [app.py:15] Application started
+05-31-2024 10:31:54 INFO     [app.py:15] Application started
+05-31-2024 10:31:58 INFO     [app.py:15] Application started
+05-32-2024 10:32:03 INFO     [app.py:15] Application started
+05-32-2024 10:32:39 INFO     [app.py:15] Application started
+05-32-2024 10:32:41 INFO     [app.py:15] Application started
+05-32-2024 10:32:43 INFO     [app.py:15] Application started
+05-32-2024 10:32:45 INFO     [app.py:15] Application started
+05-33-2024 10:33:14 INFO     [app.py:15] Application started
+05-33-2024 10:33:20 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-33-2024 10:33:20 DEBUG    [multipart.py:583] Calling on_field_name with data[0:8]
+05-33-2024 10:33:20 DEBUG    [multipart.py:583] Calling on_field_data with data[9:20]
+05-33-2024 10:33:20 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-33-2024 10:33:20 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-33-2024 10:33:20 DEBUG    [multipart.py:583] Calling on_field_name with data[21:29]
+05-33-2024 10:33:20 DEBUG    [multipart.py:583] Calling on_field_data with data[30:34]
+05-33-2024 10:33:20 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-33-2024 10:33:20 DEBUG    [multipart.py:586] Calling on_end with no data
+05-33-2024 10:33:20 INFO     [auth_views.py:30] User tries to login into the application
+05-33-2024 10:33:55 INFO     [app.py:15] Application started
+05-34-2024 10:34:00 INFO     [app.py:15] Application started
+05-34-2024 10:34:08 INFO     [app.py:15] Application started
+05-34-2024 10:34:12 INFO     [app.py:15] Application started
+05-34-2024 10:34:18 INFO     [app.py:15] Application started
+05-34-2024 10:34:21 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-34-2024 10:34:21 DEBUG    [multipart.py:583] Calling on_field_name with data[0:8]
+05-34-2024 10:34:21 DEBUG    [multipart.py:583] Calling on_field_data with data[9:20]
+05-34-2024 10:34:21 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-34-2024 10:34:21 DEBUG    [multipart.py:586] Calling on_field_start with no data
+05-34-2024 10:34:21 DEBUG    [multipart.py:583] Calling on_field_name with data[21:29]
+05-34-2024 10:34:21 DEBUG    [multipart.py:583] Calling on_field_data with data[30:34]
+05-34-2024 10:34:21 DEBUG    [multipart.py:586] Calling on_field_end with no data
+05-34-2024 10:34:21 DEBUG    [multipart.py:586] Calling on_end with no data
+05-34-2024 10:34:21 INFO     [auth_views.py:30] User with username : diya tries to login into the application

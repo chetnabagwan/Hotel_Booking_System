@@ -32,10 +32,10 @@ def fetch_user(query,username: str,password: str) -> str:
         else:
             return (record[0],record[3])        
         
-def display_data(query,val) -> None:
+def display_data(query,*args) -> None:
      with DatabaseContextManager(Config.DATABASE_NAME) as connection:
         cursor = connection.cursor()
-        data = cursor.execute(query,(val,)).fetchall()
+        data = cursor.execute(query,*args).fetchall()
         return data
 
 def update_data(query,*args) -> None:

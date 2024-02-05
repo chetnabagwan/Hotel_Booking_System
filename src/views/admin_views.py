@@ -20,7 +20,7 @@ templates = Jinja2Templates(directory = "templates")
 
 user_dependency = Annotated[dict,Depends(get_current_user)]
 
-logger = logging.getLogger('admin')
+logger = logging.getLogger(__name__)
 
 @admin_router.get("/test")
 def test(request:Request):

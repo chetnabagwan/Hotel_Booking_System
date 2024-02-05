@@ -4,7 +4,7 @@ import sqlite3
 from utils.config_class import Config
 from db import database_operations 
 
-logger = logging.getLogger('auth')
+logger = logging.getLogger(__name__)
 
 class Authentication:
   

@@ -14,7 +14,7 @@ recep_router =APIRouter(prefix='/receptionist',
 
 user_dependency = Annotated[dict,Depends(get_current_user)]
 
-logger = logging.getLogger('receptionist')
+logger = logging.getLogger(__name__)
 
 @recep_router.post("/checkin")
 def checkin(data:CheckinSchema,user:user_dependency):

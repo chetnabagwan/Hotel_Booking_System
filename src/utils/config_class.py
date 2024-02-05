@@ -30,6 +30,8 @@ class Config :
     GEN_REGEX = None
     PHONE_NUMBER_REGEX = None
     DATABASE_NAME = None  
+    ALGORITHM = None
+    SECRET_KEY = None
 
     WELCOME_MESSAGE =None 
     ROW_NOT_EXISTS_MESSAGE = None
@@ -113,6 +115,8 @@ class Config :
             cls.GEN_REGEX = data['GEN_REGEX']
             cls.PHONE_NUMBER_REGEX = data['PHONE_NUMBER_REGEX']
             cls.DATABASE_NAME = data['DATABASE_NAME']
+            cls.SECRET_KEY = data['SECRET_KEY']
+            cls.ALGORITHM = data['ALGORITHM']
 
     @classmethod
     def load_print_statements(cls):
@@ -147,7 +151,7 @@ class Config :
             cls.DEFAULT_PASSWORD_CHANGED = data['DEFAULT_PASSWORD_CHANGED']
             cls.RECEPTIONIST_ADDED = data['RECEPTIONIST_ADDED']
             cls.RECEPTIONIST_DELETED = data['RECEPTIONIST_DELETED']
-            
+
     @classmethod
     def load_logging_statements(cls):
         with open(FPATH_LOGGING_STATEMENTS,'r') as f:

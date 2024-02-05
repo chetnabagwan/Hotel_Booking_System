@@ -11,9 +11,6 @@ from utils.config_class import Config
 auth_router =APIRouter(prefix='/auth',
                        tags=['auth'])
 
-SECRET_KEY = 'fIqrMcrIKjZqsEZdfwne82n8YsL6F3K0'
-ALGORITHM = 'HS256'
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='auth/login')
 
 logger = logging.getLogger('auth')
@@ -22,7 +19,7 @@ def create_access_token(user_id:str,role:str,expires_delta:timedelta):
     payload = {'sub':user_id,'role':role}
     expires = datetime.utcnow() + expires_delta
     payload.update({'exp':expires})
-    return jwt.encode(payload,SECRET_KEY,algorithm=ALGORITHM)
+    return jwt.encode(payload,Config.SECRET_KEY,algorithm=Config.ALGORITHM)
 
 
 @auth_router.post("/login",status_code=status.HTTP_200_OK) #working
@@ -43,7 +40,7 @@ def login_and_gen_token(user_data: OAuth2PasswordRequestForm=Depends()):
 async def get_current_user(token:Annotated[str,Depends(oauth2_scheme)]):
     # print(token)
     try:
-        payload = jwt.decode(token,SECRET_KEY,algorithms=[ALGORITHM])
+        payload = jwt.decode(token,Config.SECRET_KEY,algorithms=[Config.ALGORITHM])
         user_id = payload.get('sub')
         role:str = payload.get('role')
         if user_id is None or role is None:

@@ -27,7 +27,7 @@ def checkin(data:CheckinSchema,user:user_dependency):
     except Exception as e:
         raise e
 
-@recep_router.delete("/checkout")
+@recep_router.delete("/checkout/{g_id}")
 def checkout(user:user_dependency,g_id:int = CheckoutSchema):
     logger.info(f'Receptionist {user}is Checking out the guest{g_id}')
 
@@ -39,7 +39,7 @@ def checkout(user:user_dependency,g_id:int = CheckoutSchema):
     except Error as e:
         raise e
 
-@recep_router.get("/myinfo") 
+@recep_router.get("/myinfo/{emp_id}") 
 def receptionist_info(user:user_dependency,emp_id:int = ReceptionistSchema):
     logger.info(f'Receptionist {user}is viewing his/her profile')
 

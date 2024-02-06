@@ -31,10 +31,10 @@ def getallreceps(user : user_dependency):
     logger.info(f'Admin is viewing all receptionists')
 
     try:
+        print('Config.ADMIN: ', Config.ADMIN)
         if user['role']!= Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         data = Admin.receptionist_info()
-        print(data)
         if not data :
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)
         return data
@@ -69,7 +69,9 @@ def delrecep(data:ReceptionistSchema,user:user_dependency):
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         emp_id = data.emp_id
+        
         emp =  Admin.getrecep(emp_id)
+      
         if not emp:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)      
         Admin.del_receptionist(emp_id)
@@ -86,7 +88,7 @@ def addroom(data: AddRoomSchema,user:user_dependency):
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)   
         Admin.add_rooms(data.r_type,data.r_price)
-        return {'message': 'Room added'}
+        return {'message': Config.ROOM_ADDED}
     except:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
@@ -103,7 +105,7 @@ def delroom(data:DelRoomSchema,user:user_dependency):
         if room is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)
         Admin.del_rooms(room_no)
-        return {'message': 'Room deleted'}
+        return {'message':Config.RECEPTIONIST_DELETED}
     except Exception as e:
         raise e
 
@@ -111,7 +113,6 @@ def delroom(data:DelRoomSchema,user:user_dependency):
 @admin_router.put("/updateroom") #working
 def updateroom(data:RoomUpdateSchema,user:user_dependency):
     logger.info(f'Admin is updating room details of room no : {data.room_no}')
-
     try:
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)

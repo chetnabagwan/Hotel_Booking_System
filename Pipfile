@@ -19,6 +19,8 @@ httpx = "*"
 aiofiles = "*"
 jinja2 = "*"
 shortuuid = "*"
+mock = "*"
+pytest-mock = "*"
 
 [dev-packages]
 

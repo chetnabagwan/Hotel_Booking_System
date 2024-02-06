@@ -1,0 +1,16 @@
+INFO     app:app.py:15 Application started
+DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
+INFO     views.admin_views:admin_views.py:33 Admin is viewing all receptionists
+INFO     httpx:_client.py:1027 HTTP Request: GET http://testserver/admin/receptionists "HTTP/1.1 200 OK"
+DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
+INFO     views.admin_views:admin_views.py:88 Admin is adding new rooms
+INFO     httpx:_client.py:1027 HTTP Request: POST http://testserver/admin/addroom "HTTP/1.1 201 Created"
+DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
+INFO     views.admin_views:admin_views.py:101 Admin is deleting a room
+INFO     httpx:_client.py:1027 HTTP Request: DELETE http://testserver/admin/delroom "HTTP/1.1 200 OK"
+DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
+INFO     views.admin_views:admin_views.py:69 Admin is deleting the receptionist2719
+INFO     httpx:_client.py:1027 HTTP Request: DELETE http://testserver/admin/delreceptionist "HTTP/1.1 200 OK"
+DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
+INFO     views.admin_views:admin_views.py:118 Admin is updating room details of room no : 3713
+INFO     httpx:_client.py:1027 HTTP Request: PUT http://testserver/admin/updateroom "HTTP/1.1 200 OK"

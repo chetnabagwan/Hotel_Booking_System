@@ -50,9 +50,13 @@ SUCCESSFUL_CHECKOUT : "Customer is successfully checked-out"
 
 DEFAULT_PASSWORD_CHANGED : "Default password changed"
 
-RECEPTIONIST_DELETED : 'Receptionist deleted'
+RECEPTIONIST_DELETED : "Receptionist deleted"
 
 RECEPTIONIST_ADDED : 'Receptionist added'
+
+ROOM_ADDED : 'Room added'
+
+ROOM_DELETED : 'Room deleted'
 
 PASSWORD_REQUIREMENTS : | 
  Conditions for a valid password are :

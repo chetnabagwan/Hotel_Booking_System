@@ -5,6 +5,8 @@ from .database_context_manager import DatabaseContextManager
 logger = logging.getLogger('database')
 
 def create_table(query) -> None:
+    print(Config.DATABASE_NAME)
+    print("My database: --------------------------------------", Config.DATABASE_NAME)
     with DatabaseContextManager(Config.DATABASE_NAME) as connection:
         cursor = connection.cursor()
         cursor.execute(Config.QUERY_TO_ENABLE_FOREIGN_KEY)
@@ -49,3 +51,9 @@ def fetch_data(query,id:int):
         cursor = connection.cursor()
         record = cursor.execute(query,(id,)).fetchone()
         return record
+    
+def delete_data(query):
+    with DatabaseContextManager(Config.DATABASE_NAME) as connection:
+        cursor = connection.cursor()
+        cursor.execute(query)
+    

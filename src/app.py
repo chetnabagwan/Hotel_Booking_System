@@ -25,4 +25,3 @@ app.include_router(auth_views.auth_router)
 app.include_router(admin_views.admin_router)
 app.include_router(receptionist_views.recep_router)
 
-# logger.info('Application ended')

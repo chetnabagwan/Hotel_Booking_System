@@ -151,6 +151,8 @@ class Config :
             cls.DEFAULT_PASSWORD_CHANGED = data['DEFAULT_PASSWORD_CHANGED']
             cls.RECEPTIONIST_ADDED = data['RECEPTIONIST_ADDED']
             cls.RECEPTIONIST_DELETED = data['RECEPTIONIST_DELETED']
+            cls.ROOM_ADDED = data['ROOM_ADDED']
+            cls.ROOM_DELETED = data['ROOM_DELETED']
 
     @classmethod
     def load_logging_statements(cls):
@@ -163,8 +165,7 @@ class Config :
             cls.UPDATED_SUCCESSFULLY = data['UPDATED_SUCCESSFULLY']
             cls.LOGGED_IN = data['LOGGED_IN']
             cls.ERROR_MESSAGE = data['ERROR_MESSAGE']
-            cls.ROOM_ADDED = data['ROOM_ADDED']
-            cls.ROOM_DELETED = data['ROOM_DELETED']
+          
 
     @classmethod
     def loadAdminQueries(cls):

@@ -55,17 +55,15 @@ def addrecep(data:AddReceptionistSchema,user:user_dependency):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=Config.USER_ALREADY_EXIST)
     
     
-@admin_router.delete("/delreceptionist") #working
-def delrecep(data:ReceptionistSchema,user:user_dependency):
-    logger.info(f'Admin is deleting the receptionist{data.emp_id}')
+@admin_router.delete("/delreceptionist/{emp_id}") #working
+def delrecep(emp_id:int ,user:user_dependency):
+    logger.info(f'Admin is deleting the receptionist{emp_id}')
 
     try:
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
-        emp_id = data.emp_id
-        
+
         emp =  Admin.getrecep(emp_id)
-      
         if not emp:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)      
         Admin.del_receptionist(emp_id)

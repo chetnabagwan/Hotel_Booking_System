@@ -20,7 +20,8 @@ class Receptionist:
     @staticmethod
     def checkout(g_id):
         try:
-            room_id = database_operations.fetch_data(Config.QUERY_TO_GET_ROOMID_FROM_GUESTID,g_id)
+            room = database_operations.fetch_data(Config.QUERY_TO_GET_ROOMID_FROM_GUESTID,g_id)
+            room_id = room[0]
             # database_operations.write_to_database([Config.QUERY_FOR_CHECKOUT,Config.QUERY_TO_CHANGE_ROOM_STATUS],[(g_id,),(room_id,)])
             database_operations.write_to_database(Config.QUERY_FOR_CHECKOUT,(g_id,))
             database_operations.write_to_database(Config.QUERY_TO_CHANGE_ROOM_STATUS,(room_id,))

@@ -49,9 +49,14 @@ def test_addrecep():
 
 
 def test_delrecep():
-    request_data ={"emp_id" : 2719}
-    response = admin.request("DELETE","/admin/delreceptionist",json = request_data)
+    response = admin.request("DELETE","admin/delreceptionist/2719")
     assert response.json() == {"message": Config.RECEPTIONIST_DELETED}
+
+
+def test_delrecep_notfound():
+    response = admin.request("DELETE","admin/delreceptionist/2729")
+    assert response.json() == {"detail": Config.NO_DATA_FOUND}
+    assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
 def test_updateroom():

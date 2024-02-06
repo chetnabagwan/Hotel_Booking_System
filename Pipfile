@@ -21,6 +21,8 @@ jinja2 = "*"
 shortuuid = "*"
 mock = "*"
 pytest-mock = "*"
+coverage = "*"
+pytest-cov = "*"
 
 [dev-packages]
 

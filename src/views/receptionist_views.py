@@ -39,7 +39,7 @@ def checkout(user:user_dependency,g_id:int = CheckoutSchema):
         raise e
 
 @recep_router.get("/myinfo/{emp_id}") 
-def receptionist_info(user:user_dependency,emp_id:int = ReceptionistSchema):
+def receptionist_info(emp_id: int, user:user_dependency):
     logger.info(f'Receptionist {user}is viewing his/her profile')
     try:
         if user['role']!= Config.RECEPTIONIST:

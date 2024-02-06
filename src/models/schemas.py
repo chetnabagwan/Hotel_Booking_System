@@ -1,5 +1,5 @@
 from pydantic import BaseModel,Field,ConfigDict,FutureDate
-from fastapi import Query,Path
+from fastapi import Path
 from datetime import date, datetime
 
 class AuthLoginRequest(BaseModel):

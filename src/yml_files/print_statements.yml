@@ -58,6 +58,8 @@ ROOM_ADDED : 'Room added'
 
 ROOM_DELETED : 'Room deleted'
 
+DETAILS_UPDATED : "Your details are successfuly updated"
+
 PASSWORD_REQUIREMENTS : | 
  Conditions for a valid password are :
 

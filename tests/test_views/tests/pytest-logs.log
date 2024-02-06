@@ -24,14 +24,10 @@ DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
 INFO     views.receptionist_views:receptionist_views.py:21 Receptionist {'role': 'receptionist', 'user_id': 3214}is Checking in the guest
 INFO     httpx:_client.py:1027 HTTP Request: POST http://testserver/receptionist/checkin "HTTP/1.1 200 OK"
 DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
-INFO     views.receptionist_views:receptionist_views.py:32 Receptionist {'role': 'receptionist', 'user_id': 3214}is Checking out the guest 6723
-INFO     httpx:_client.py:1027 HTTP Request: DELETE http://testserver/receptionist/checkout/6723 "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1027 HTTP Request: DELETE http://testserver/checkout/%7B6723%7D "HTTP/1.1 404 Not Found"
 DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
-INFO     views.receptionist_views:receptionist_views.py:57 Receptionist {'role': 'receptionist', 'user_id': 3214}is viewing all available rooms in the hotel
+INFO     views.receptionist_views:receptionist_views.py:59 Receptionist {'role': 'receptionist', 'user_id': 3214}is viewing all available rooms in the hotel
 INFO     httpx:_client.py:1027 HTTP Request: GET http://testserver/receptionist/available-rooms "HTTP/1.1 200 OK"
 DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
-INFO     views.receptionist_views:receptionist_views.py:43 Receptionist {'role': 'receptionist', 'user_id': 3214}is viewing his/her profile
-INFO     httpx:_client.py:1027 HTTP Request: GET http://testserver/receptionist/myinfo/3214 "HTTP/1.1 200 OK"
-DEBUG    asyncio:proactor_events.py:633 Using proactor: IocpProactor
-INFO     views.receptionist_views:receptionist_views.py:79 Receptionist {'role': 'receptionist', 'user_id': 3214}is updating his/her details
+INFO     views.receptionist_views:receptionist_views.py:81 Receptionist {'role': 'receptionist', 'user_id': 3214}is updating his/her details
 INFO     httpx:_client.py:1027 HTTP Request: PUT http://testserver/receptionist/update-myinfo "HTTP/1.1 200 OK"

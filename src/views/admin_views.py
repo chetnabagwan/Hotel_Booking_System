@@ -16,15 +16,9 @@ import logging
 admin_router =APIRouter(prefix='/admin',
                        tags=['admin'])
 
-templates = Jinja2Templates(directory = "templates")
-
 user_dependency = Annotated[dict,Depends(get_current_user)]
 
 logger = logging.getLogger(__name__)
-
-@admin_router.get("/test")
-def test(request:Request):
-    return templates.TemplateResponse("home.html",{"request": request})
 
 @admin_router.get('/receptionists',status_code=status.HTTP_200_OK) #working
 def getallreceps(user : user_dependency):
@@ -135,9 +129,6 @@ def view_all_bookings(user:user_dependency):
         if user['role']!= Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         data = Admin.view_all_bookings()
-        print(data)
-        if not data :
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)
         return data
     except Exception as e:
         raise e

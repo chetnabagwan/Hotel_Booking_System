@@ -35,9 +35,10 @@ def fetch_user(query,username: str,password: str) -> str:
             return (record[0],record[3])        
         
 def display_data(query,*args) -> None:
+     print("*"*100, *args)
      with DatabaseContextManager(Config.DATABASE_NAME) as connection:
         cursor = connection.cursor()
-        data = cursor.execute(query,*args).fetchall()
+        data = cursor.execute(query,(*args,)).fetchall()
         return data
 
 def update_data(query,*args) -> None:
@@ -50,7 +51,7 @@ def fetch_data(query,id:int):
     with DatabaseContextManager(Config.DATABASE_NAME) as connection:
         cursor = connection.cursor()
         record = cursor.execute(query,(id,)).fetchone()
-        return record
+        return record[0]
     
 def delete_data(query):
     with DatabaseContextManager(Config.DATABASE_NAME) as connection:

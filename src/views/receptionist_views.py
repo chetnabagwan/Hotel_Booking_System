@@ -29,8 +29,7 @@ def checkin(data:CheckinSchema,user:user_dependency):
 
 @recep_router.delete("/checkout/{g_id}")
 def checkout(user:user_dependency,g_id:int = CheckoutSchema):
-    logger.info(f'Receptionist {user}is Checking out the guest{g_id}')
-
+    logger.info(f'Receptionist {user}is Checking out the guest {g_id}')
     try:
         if user['role']!= Config.RECEPTIONIST:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
@@ -42,7 +41,6 @@ def checkout(user:user_dependency,g_id:int = CheckoutSchema):
 @recep_router.get("/myinfo/{emp_id}") 
 def receptionist_info(user:user_dependency,emp_id:int = ReceptionistSchema):
     logger.info(f'Receptionist {user}is viewing his/her profile')
-
     try:
         if user['role']!= Config.RECEPTIONIST:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
@@ -57,7 +55,6 @@ def receptionist_info(user:user_dependency,emp_id:int = ReceptionistSchema):
 @recep_router.get("/available-rooms")   
 def view_available_rooms(user:user_dependency):
     logger.info(f'Receptionist {user}is viewing all available rooms in the hotel')
-
     try:
         rooms = Receptionist.view_available_rooms()
         return rooms
@@ -88,8 +85,7 @@ def update_details(data:ChangeEmpDetailsSchema,user:user_dependency):
         email = data.email
         age = data.age
         phone = data.phone
-        print(phone)
         Receptionist.update_my_details(emp_id,email,age,phone)
-        return{'message': f'Receptionist details updated'}
+        return{'message': Config.DETAILS_UPDATED}
     except Exception as e :
         raise e 

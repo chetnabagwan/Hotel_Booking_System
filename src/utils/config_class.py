@@ -72,6 +72,7 @@ class Config :
     DEFAULT_PASSWORD_CHANGED = None
     RECEPTIONIST_ADDED = None
     RECEPTIONIST_DELETED = None
+    DETAILS_UPDATED = None
 
     QUERY_FOR_CREATE_AUTH_TABLE = None
     QUERY_FOR_CREATE_HELPDESK_DETAILS_TABLE = None
@@ -152,7 +153,8 @@ class Config :
             cls.RECEPTIONIST_ADDED = data['RECEPTIONIST_ADDED']
             cls.RECEPTIONIST_DELETED = data['RECEPTIONIST_DELETED']
             cls.ROOM_ADDED = data['ROOM_ADDED']
-            cls.ROOM_DELETED = data['ROOM_DELETED']
+            cls.ROOM_DELETED = data['ROOM_DELETED'] 
+            cls.DETAILS_UPDATED = data['DETAILS_UPDATED']
 
     @classmethod
     def load_logging_statements(cls):

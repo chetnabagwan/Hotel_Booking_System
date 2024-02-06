@@ -1,5 +1,5 @@
 from pydantic import BaseModel,Field,ConfigDict,FutureDate
-from fastapi import Query
+from fastapi import Query,Path
 from datetime import date, datetime
 
 class AuthLoginRequest(BaseModel):
@@ -29,7 +29,7 @@ class AddReceptionistSchema(BaseModel):
     emp_gender: str
 
 class ReceptionistSchema(BaseModel):
-    emp_id: int = Query
+    emp_id: int = Path
 
 class CheckinSchema(BaseModel):
     g_name: str
@@ -40,7 +40,7 @@ class CheckinSchema(BaseModel):
     check_out_date: FutureDate
 
 class CheckoutSchema(BaseModel):
-    g_id: int = Query
+    g_id: int = Path
 
 class ChangeDefaultPasswordSchema(BaseModel):
     old_pswd: str

@@ -26,10 +26,8 @@ def create_access_token(user_id:str,role:str,expires_delta:timedelta):
 @auth_router.post("/login",status_code=status.HTTP_200_OK)
 def login_and_gen_token(user_data: OAuth2PasswordRequestForm=Depends()):
     logger.info(f'User with username : {user_data.username} tries to login into the application')
-
     try:
-        data = Authentication.login(user_data.username,user_data.password) 
-       
+        data = Authentication.login(user_data.username,user_data.password)    
         if data :
             token = create_access_token(str(data[0]),data[1],timedelta(minutes=15))
             return {'access_token':token,'token_type':'Bearer'}

@@ -6,7 +6,7 @@ from controllers.admin_controllers import Admin
 from starlette import status
 from typing import Annotated
 from fastapi import APIRouter, Depends,HTTPException
-from views.auth_views import get_current_user
+from resources.auth import get_current_user
 from utils.config_class import Config
 from sqlite3 import Error
 from fastapi.responses import HTMLResponse
@@ -25,7 +25,6 @@ def getallreceps(user : user_dependency):
     logger.info(f'Admin is viewing all receptionists')
 
     try:
-        print('Config.ADMIN: ', Config.ADMIN)
         if user['role']!= Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         data = Admin.receptionist_info()

@@ -68,3 +68,4 @@ PASSWORD_REQUIREMENTS : |
   -> Should have at least one special symbol.
   -> Should be between 6 to 20 characters long.
 
+OLD_PASSWORD_INCORRECT : "Old password is correct"

@@ -4,7 +4,7 @@ from models.schemas import CheckinSchema,CheckoutSchema,ReceptionistSchema,Chang
 from controllers.receptionist_controllers import Receptionist
 from controllers.admin_controllers import Admin
 from utils.config_class import Config
-from views.auth_views import get_current_user
+from resources.auth import get_current_user
 from typing import Annotated
 from sqlite3 import Error
 import logging
@@ -27,6 +27,7 @@ def checkin(data:CheckinSchema,user:user_dependency):
     except Exception as e:
         raise e
 
+
 @recep_router.delete("/checkout/{g_id}")
 def checkout(user:user_dependency,g_id:int = CheckoutSchema):
     logger.info(f'Receptionist {user}is Checking out the guest {g_id}')
@@ -37,6 +38,7 @@ def checkout(user:user_dependency,g_id:int = CheckoutSchema):
         return {'message': Config.SUCCESSFUL_CHECKOUT}
     except Error as e:
         raise e
+
 
 @recep_router.get("/myinfo/{emp_id}") 
 def receptionist_info(emp_id: int, user:user_dependency):
@@ -52,6 +54,7 @@ def receptionist_info(emp_id: int, user:user_dependency):
     except Exception as e:
         raise e
 
+
 @recep_router.get("/available-rooms")   
 def view_available_rooms(user:user_dependency):
     logger.info(f'Receptionist {user}is viewing all available rooms in the hotel')
@@ -65,15 +68,15 @@ def view_available_rooms(user:user_dependency):
 @recep_router.put("/change-default-pswd")
 def change_default_pswd(data:ChangeDefaultPasswordSchema,user:user_dependency):
     logger.info(f'Receptionist {user}is changing his/her default password')
-   
     try:
         if user['role']!= Config.RECEPTIONIST:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         Receptionist.change_default_password(user['user_id'],data.old_pswd,data.new_pswd)
-        return{'message': Config.DEFAULT_PASSWORD_CHANGED}
+        return {'message': Config.DEFAULT_PASSWORD_CHANGED}
     except Exception as e:
-        raise e
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.OLD_PASSWORD_INCORRECT)
     
+
 @recep_router.put("/update-myinfo")#working
 def update_details(data:ChangeEmpDetailsSchema,user:user_dependency):
     logger.info(f'Receptionist {user}is updating his/her details')

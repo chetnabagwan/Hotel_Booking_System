@@ -27,7 +27,7 @@ def insert_into_table():
 
     d1 = ('1234','chetna',hashed_passworda,'admin',1)
     d2 = ('2719','diya',hashed_passwordr1,'receptionist',1)
-    d3= ('3214','raj',hashed_passwordr2,'receptionist',1)
+    d3= ('3214','raj',hashed_passwordr2,'receptionist',0)
     write_to_database(q1,d1)
     write_to_database(q1,d2)
     write_to_database(q1,d3)

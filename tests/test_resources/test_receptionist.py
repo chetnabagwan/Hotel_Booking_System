@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient 
 import pytest
 from fastapi import status
-from views.receptionist_views import get_current_user
+from resources.receptionist import get_current_user
 from utils.config_class import Config
 from app import app
 
@@ -41,6 +41,22 @@ def test_view_available_rooms():
 def test_receptionist_info():
     response = receptionist.get("receptionist/myinfo/3214")
     assert response.status_code == status.HTTP_200_OK
+
+
+def test_change_password_success():
+    request_data = {"old_pswd" : "Raj@12",
+                    "new_pswd" : "Raaj@12"}
+    response = receptionist.put("receptionist/change-default-pswd",json= request_data)
+    assert response.status_code == status.HTTP_200_OK
+    assert response.json() == {'message': Config.DEFAULT_PASSWORD_CHANGED}
+
+
+def test_change_password_invalid():
+    request_data = {"old_pswd" : "wrong",
+                    "new_pswd" : "newpswd"}
+    response = receptionist.put("receptionist/change-default-pswd",json= request_data)
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
+    assert response.json() == {"detail": Config.OLD_PASSWORD_INCORRECT}
 
 
 def test_update_details():

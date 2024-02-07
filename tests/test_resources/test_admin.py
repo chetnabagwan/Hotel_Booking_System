@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient 
 from app import app
 from fastapi import status
-from views.admin_views import get_current_user
+from resources.admin import get_current_user
 from utils.config_class import Config
 import pytest
 

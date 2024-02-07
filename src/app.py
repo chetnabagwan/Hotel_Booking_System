@@ -1,6 +1,6 @@
 import logging
 from fastapi import FastAPI
-from views import auth_views,admin_views,receptionist_views
+from resources import admin, auth, receptionist
 from starlette.staticfiles import StaticFiles
 
 logging.basicConfig(
@@ -21,7 +21,7 @@ def health_check():
 
 # app.mount("/static",StaticFiles(directory="static"),name="static")
 
-app.include_router(auth_views.auth_router)
-app.include_router(admin_views.admin_router)
-app.include_router(receptionist_views.recep_router)
+app.include_router(auth.auth_router)
+app.include_router(admin.admin_router)
+app.include_router(receptionist.recep_router)
 

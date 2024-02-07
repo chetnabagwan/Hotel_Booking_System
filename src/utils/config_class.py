@@ -54,6 +54,7 @@ class Config :
     PASSWORD_REQUIREMENTS = None
     UNAUTHORIZED_USER = None
     NO_DATA_FOUND = None
+    OLD_PASSWORD_INCORRECT = None
 
     WELCOME_LOGGING_INFO = None
     WRONG_FILE_RUNNED = None
@@ -155,6 +156,7 @@ class Config :
             cls.ROOM_ADDED = data['ROOM_ADDED']
             cls.ROOM_DELETED = data['ROOM_DELETED'] 
             cls.DETAILS_UPDATED = data['DETAILS_UPDATED']
+            cls.OLD_PASSWORD_INCORRECT = data['OLD_PASSWORD_INCORRECT']
 
     @classmethod
     def load_logging_statements(cls):

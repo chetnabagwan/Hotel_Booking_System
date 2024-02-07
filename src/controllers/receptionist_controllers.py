@@ -48,8 +48,6 @@ class Receptionist:
     def change_default_password(user_id,old_pswd,new_pswd):
         hashed_old_password = hashlib.sha256(old_pswd.encode()).hexdigest() 
         hashed_new_password = hashlib.sha256(new_pswd.encode()).hexdigest() 
-        print(hashed_old_password)
-        print(hashed_new_password)
         pwd = database_operations.fetch_data(Config.QUERY_TO_FETCH_PASSWORD_FROM_AUTH,user_id)
         try:
             if pwd[0] == hashed_old_password:

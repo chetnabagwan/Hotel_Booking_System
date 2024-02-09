@@ -23,6 +23,7 @@ mock = "*"
 pytest-mock = "*"
 coverage = "*"
 pytest-cov = "*"
+jose = "*"
 
 [dev-packages]
 

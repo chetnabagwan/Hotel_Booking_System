@@ -61,8 +61,8 @@ def delrecep(emp_id:int ,user:user_dependency):
     try:
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
-
         emp =  Admin.getrecep(emp_id)
+        print(emp)
         if not emp:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)      
         Admin.del_receptionist(emp_id)

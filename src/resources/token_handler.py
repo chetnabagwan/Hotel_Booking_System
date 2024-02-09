@@ -3,10 +3,8 @@ from typing import Annotated
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 import logging
-from fastapi import APIRouter, Depends,HTTPException
+from fastapi import Depends,HTTPException
 from datetime import datetime,timedelta
-from blocklist import BLOCKLIST
-from controllers.auth_controller import Authentication
 from utils.config_class import Config
 
 logger = logging.getLogger(__name__)

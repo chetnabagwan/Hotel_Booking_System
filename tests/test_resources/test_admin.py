@@ -48,6 +48,18 @@ def test_addrecep():
     assert response.status_code == status.HTTP_201_CREATED
 
 
+def test_addrecep_integrityerror():
+    request_data = {
+  "username": "riya",
+  "password": "Riya@12",
+  "emp_email": "riya@gmail.com",
+  "emp_age": 35,
+  "emp_phone": 9825425620,
+  "emp_gender": "female"}
+    response =  admin.post("admin/addreceptionist",json= request_data)
+    assert response.status_code == status.HTTP_409_CONFLICT
+    assert response.json() == {'detail': Config.USER_ALREADY_EXIST}
+
 def test_delrecep():
     response = admin.request("DELETE","admin/delreceptionist/2719")
     assert response.json() == {"message": Config.RECEPTIONIST_DELETED}

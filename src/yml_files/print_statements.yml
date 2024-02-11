@@ -40,7 +40,7 @@ NO_DATA_FOUND : "No such data found"
 
 INVALID_CREDENTIALS : 'Invalid credentials'
 
-UNAUTHENTICATED_USER  : 'Authentication failed/Token not found/Invalid user'
+UNAUTHENTICATED  : "Not authenticated"
 
 USER_ALREADY_EXIST : 'User already exists'
 

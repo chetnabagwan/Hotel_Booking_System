@@ -32,6 +32,15 @@ class Receptionist:
     def view_available_rooms():
         try:
             data = database_operations.display_data(Config.QUERY_TO_FETCH_ALL_AVAILABLE_ROOMS)
+            data = [
+                {
+                    "room_id" : row[0],
+                    "room_type" : row[1],
+                    "room_price": row[2],
+                    "room_status": row[3]
+                }
+                for row in data
+            ]
             return data
         except sqlite3.Error as e:
             raise e
@@ -40,6 +49,16 @@ class Receptionist:
     def recep_details(emp_id):
         try:
             data = database_operations.display_data(Config.QUERY_TO_DISPLAY_SELFRECEPTIONIST_DETAILS,emp_id)
+            data = [
+                {
+                    "user_id":row[0],
+                    "email":row[1],
+                    "age":row[2],
+                    "phone-number":row[3],
+                    "gender":row[4]
+                }
+                for row in data
+            ]
             return data
         except sqlite3.Error as e:
             raise e

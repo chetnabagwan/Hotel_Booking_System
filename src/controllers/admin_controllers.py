@@ -48,9 +48,33 @@ class Admin:
     @staticmethod
     def receptionist_info():
         data = display_data(Config.QUERY_TO_DISPLAY_ALLRECEPTIONIST_DETAILS)
+        data = [
+                {
+                    "user_id":row[0],
+                    "email":row[1],
+                    "age":row[2],
+                    "phone-number":row[3],
+                    "gender":row[4]
+                }
+                for row in data
+            ]
         return data
     
     @staticmethod
     def view_all_bookings():
         data = display_data(Config.QUERY_TO_VIEW_ALL_BOOKINGS)
+        data = [
+            {
+                "g_id" : row[0],
+                "g_name": row[1], 
+                "g_email": row[2],
+                "g_phone": row[3],
+                "g_adrs": row[4],
+                "room_id": row[5],
+                "check_in_date": row[6],
+                "check_out_date": row[7]
+            }
+            for row in data
+        ]
         return data
+    

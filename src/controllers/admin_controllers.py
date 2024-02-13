@@ -10,6 +10,7 @@ class Admin:
     def add_rooms(r_type, r_price) :
         room_id = int(shortuuid.ShortUUID('123456789').random(length=4))
         write_to_database(Config.QUERY_TO_ADD_IN_ROOM_DETAILS_TABLE,(room_id,r_type, r_price))
+        return room_id
 
     @staticmethod        
     def del_rooms(room_id) :     
@@ -48,13 +49,15 @@ class Admin:
     @staticmethod
     def receptionist_info():
         data = display_data(Config.QUERY_TO_DISPLAY_ALLRECEPTIONIST_DETAILS)
+        print(data)
         data = [
                 {
                     "user_id":row[0],
-                    "email":row[1],
-                    "age":row[2],
-                    "phone-number":row[3],
-                    "gender":row[4]
+                    "username":row[1],
+                    "email":row[2],
+                    "age":row[3],
+                    "phone-number":row[4],
+                    "gender":row[5]
                 }
                 for row in data
             ]

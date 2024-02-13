@@ -22,8 +22,9 @@ def checkin(data:CheckinSchema,user:user_dependency):
     try:
         if user['role']!= Config.RECEPTIONIST:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=Config.UNAUTHORIZED_USER)
-        Receptionist.checkin(data.g_name,data.g_email,data.g_phone,data.g_adrs,data.room_id,data.check_out_date)
-        return {'message': Config.SUCCESSFUL_CHECKIN}
+        g_id = Receptionist.checkin(data.g_name,data.g_email,data.g_phone,data.g_adrs,data.room_id,data.check_out_date)
+        return {'message': Config.SUCCESSFUL_CHECKIN,
+                'guest_id' : g_id}
     except Exception as e:
         raise e
 
@@ -44,7 +45,7 @@ def checkout(user:user_dependency,g_id:int = CheckoutSchema):
 def receptionist_info(emp_id: int, user:user_dependency):
     logger.info(f'Receptionist {user}is viewing his/her profile')
     try:
-        print(user)
+        # print(user)
         if user['role']!= Config.RECEPTIONIST:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=Config.UNAUTHORIZED_USER)
         e = Admin.getrecep(emp_id)
@@ -76,8 +77,8 @@ def change_default_pswd(data:ChangeDefaultPasswordSchema,user:user_dependency):
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=Config.UNAUTHORIZED_USER)
         Receptionist.change_default_password(user['user_id'],data.old_pswd,data.new_pswd)
         return {'message': Config.DEFAULT_PASSWORD_CHANGED}
-    except Exception as e:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.OLD_PASSWORD_INCORRECT)
+    except:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHENTICATED)
     
 
 @recep_router.put("/update-myinfo")#working

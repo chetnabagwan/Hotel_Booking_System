@@ -10,7 +10,7 @@ QUERY_TO_GET_UNOCCUPIED_SMALLESTROOMNO : |
 
 QUERY_TO_FETCH_PASSWORD_FROM_AUTH : |
                           SELECT password FROM authentication
-                          WHERE user_id = ? AND pwd_changed = 0
+                          WHERE user_id = ?
 
 QUERY_TO_CHANGE_DEFAULT_PASSWORD : |
   UPDATE authentication

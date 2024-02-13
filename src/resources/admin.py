@@ -38,7 +38,6 @@ def getallreceps(user : user_dependency):
 @admin_router.post("/addreceptionist",status_code=status.HTTP_201_CREATED) #working
 def addrecep(data:AddReceptionistSchema,user:user_dependency):
     logger.info(f'Admin is adding new receptionists')
-
     try:
         if user['role']!= Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
@@ -62,7 +61,6 @@ def delrecep(emp_id:int ,user:user_dependency):
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
         emp =  Admin.getrecep(emp_id)
-        print(emp)
         if not emp:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)      
         Admin.del_receptionist(emp_id)
@@ -78,25 +76,24 @@ def addroom(data: AddRoomSchema,user:user_dependency):
     try: 
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)   
-        Admin.add_rooms(data.r_type,data.r_price)
-        return {'message': Config.ROOM_ADDED}
+        room_id = Admin.add_rooms(data.r_type,data.r_price)
+        return {'message': Config.ROOM_ADDED,
+                'room_id' : room_id}
     except:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
-@admin_router.delete("/delroom") #working
-def delroom(data:DelRoomSchema,user:user_dependency): 
+@admin_router.delete("/delroom/{room_no}") #working
+def delroom(room_no:int,user:user_dependency): 
     logger.info(f'Admin is deleting a room')
-
     try:
         if user['role'] != Config.ADMIN:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=Config.UNAUTHORIZED_USER)
-        room_no = data.room_no
         room = Admin.getroom(room_no)
         if room is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=Config.NO_DATA_FOUND)
         Admin.del_rooms(room_no)
-        return {'message':Config.RECEPTIONIST_DELETED}
+        return {'message':Config.ROOM_DELETED}
     except Exception as e:
         raise e
 

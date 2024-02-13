@@ -14,6 +14,7 @@ class Receptionist:
         try:
             database_operations.write_to_database([Config.QUERY_FOR_CHECKIN,Config.QUERY_TO_CHANGE_ROOM_STATUS],
                                                   [(g_id,g_name,g_email,g_phone,g_adrs,room_id,check_in_date,check_out_date),(room_id,)])
+            return g_id
         except sqlite3.Error as e:
             raise e
     
@@ -66,13 +67,13 @@ class Receptionist:
     @staticmethod
     def change_default_password(user_id,old_pswd,new_pswd):
         hashed_old_password = hashlib.sha256(old_pswd.encode()).hexdigest() 
-        hashed_new_password = hashlib.sha256(new_pswd.encode()).hexdigest() 
+        hashed_new_password = hashlib.sha256(new_pswd.encode()).hexdigest()
         pwd = database_operations.fetch_data(Config.QUERY_TO_FETCH_PASSWORD_FROM_AUTH,user_id)
         try:
             if pwd[0] == hashed_old_password:
                 database_operations.update_data(Config.QUERY_TO_CHANGE_DEFAULT_PASSWORD,(hashed_new_password,user_id))
         except sqlite3.Error as e:
-            raise e
+            print(e)
     
     @staticmethod
     def update_my_details(emp_id,mail,age,phone):  
